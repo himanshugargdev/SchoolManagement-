@@ -27,7 +27,7 @@ if (isset($_POST['update'])) {
 
 if (isset($_POST['new'])) {
 
-  $sql = "INSERT INTO `student`( `student_roll_no`, `class_id`, `student_name`, `student_email`, `student_phone`, `student_psw`, `insert_by` ,`status`) VALUES ('$student_roll_no',  '$class_id',  '$student_name',  '$student_email', '$student_phone' ,  '123456',  $admin_id,'$status')";
+    $sql = "INSERT INTO `student`( `student_roll_no`, `class_id`, `student_name`, `student_email`, `student_phone`, `student_psw`, `insert_by` ,`status`) VALUES ('$student_roll_no',  '$class_id',  '$student_name',  '$student_email', '$student_phone' ,  '123456',  $admin_id,'$status')";
   if (!mysqli_query($conn, $sql)) {
     echo '<script>swal("Status!","Unable to Add New Student.","error"); </script>';
   } else {

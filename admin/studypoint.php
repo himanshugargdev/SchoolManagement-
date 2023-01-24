@@ -13,7 +13,7 @@ if (isset($_POST['new']) || isset($_POST['update'])) {
 
 if (isset($_POST['new'])) {
   $sql = "INSERT INTO `topic`(  `class_id`, `subject_id`, `topic_title`, `topic_content` ) VALUES ( '$class_id','$subject_id','$topic_title','$topic_content' )";
-
+  echo "<script>alert('$sql')</script>";
   if (!mysqli_query($conn, $sql)) {
     echo '<script>swal("Status!","Unable to Add New Topic.","error"); </script>';
   } else {
