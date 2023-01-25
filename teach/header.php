@@ -29,7 +29,7 @@ if (mysqli_num_rows($res) > 0) {
   <link rel="apple-touch-icon" sizes="76x76" href="../assets/images/white.png">
   <link rel="icon" type="image/png" href="../assets/images/white.png">
   <title>
-    Admin
+    Home
   </title>
   <!--     Fonts and icons     -->
   <link rel="stylesheet" type="text/css"
@@ -76,7 +76,27 @@ if (mysqli_num_rows($res) > 0) {
           <a class="nav-link text-white   bg-gradient-secondary" href="profile.php">
             <span class="nav-link-text ms-1">My Profile</span>
           </a>
+        </li> 
+        
+        <li class="nav-item">
+          <a class="nav-link text-white   bg-gradient-secondary" href="manage-attendance.php">
+            <span class="nav-link-text ms-1"> Attendance</span>
+          </a>
         </li>
+        
+        <li class="nav-item">
+          <a class="nav-link text-white   bg-gradient-secondary" href="manage-work.php">
+            <span class="nav-link-text ms-1">Manage Work</span>
+          </a>
+        </li>
+        
+        <li class="nav-item">
+          <a class="nav-link text-white   bg-gradient-secondary" href="manage-test.php">
+            <span class="nav-link-text ms-1">Manage Test</span>
+          </a>
+        </li>
+        
+       
       </ul>
     </div>
     <div class="sidenav-footer position-absolute w-100 bottom-0 ">

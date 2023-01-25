@@ -81,6 +81,11 @@ include "header.php";
                             $_SESSION['staff_email'] = $row_adm['staff_email'];
                             $_SESSION['staff_phone'] = $row_adm['staff_phone'];
                             $_SESSION['session_status'] = 'staff';
+                            ?>
+                            <script>
+                                window.location = "teach/profile.php";
+                            </script>
+                            <?
                         } else {
                 ?>
                 <script>

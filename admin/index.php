@@ -88,7 +88,7 @@ include "header.php";
     <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
       <div class="card">
         <div class="card-header p-3 pt-2">
-          <a href="managesubject.php.php">
+          <a href="managesubject.php">
             <div
               class="icon icon-lg icon-shape bg-gradient-dark shadow-dark text-center border-radius-xl mt-n4 position-absolute">
               <i class="material-icons opacity-10">Manage Subject</i>

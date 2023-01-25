@@ -2,8 +2,11 @@
 include "../server/conn.php";
 if (isset($_POST['getSubject'])) {
 
-    $sql = "SELECT * FROM `subject`";
-
+    $arr = array();
+    $arr = json_decode($_POST['getSubject']);
+    $cls = $arr->cls;
+      $sql = "SELECT * FROM `subject` Where class_id=$cls"; 
+  
     $sql = mysqli_query($conn, $sql);
     $arr = array();
     while ($row = mysqli_fetch_assoc($sql)) {

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 24, 2023 at 07:40 PM
+-- Generation Time: Jan 25, 2023 at 08:21 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.0.25
 
@@ -53,6 +53,40 @@ INSERT INTO `admin` (`admin_id`, `admin_name`, `admin_email`, `admin_phone`, `ad
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `attendance`
+--
+
+CREATE TABLE `attendance` (
+  `id` int(11) NOT NULL,
+  `student_id` int(11) NOT NULL,
+  `class_id` int(11) NOT NULL,
+  `subject_id` int(11) NOT NULL,
+  `teacher_id` int(11) NOT NULL,
+  `class_time` varchar(11) NOT NULL,
+  `date` date DEFAULT NULL,
+  `attendance` varchar(40) NOT NULL,
+  `insert_by` int(11) NOT NULL,
+  `update_by` int(11) NOT NULL,
+  `insert_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `update_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `attendance`
+--
+
+INSERT INTO `attendance` (`id`, `student_id`, `class_id`, `subject_id`, `teacher_id`, `class_time`, `date`, `attendance`, `insert_by`, `update_by`, `insert_at`, `update_at`) VALUES
+(15, 1001, 3, 3, 1, '22:42', '2023-01-25', 'Present', 1, 0, '2023-01-25 18:03:47', '2023-01-25 18:03:47'),
+(16, 1001, 3, 3, 1, '22:42', '2023-01-25', 'Present', 1, 0, '2023-01-25 18:05:27', '2023-01-25 18:05:27'),
+(17, 1001, 3, 3, 1, '23:40', '2023-01-25', 'Present', 1, 0, '2023-01-25 18:15:38', '2023-01-25 18:15:38'),
+(18, 1002, 3, 3, 1, '23:40', '2023-01-25', 'Absent', 1, 0, '2023-01-25 18:19:31', '2023-01-25 18:19:31'),
+(19, 1002, 3, 3, 1, '23:40', '2023-01-25', 'leave', 1, 0, '2023-01-25 18:19:37', '2023-01-25 18:19:37'),
+(20, 1001, 3, 3, 1, '00:04', '2023-01-26', 'Present', 1, 1, '2023-01-25 18:34:17', '2023-01-25 18:39:07'),
+(21, 1002, 3, 3, 1, '00:04', '2023-01-26', 'Absent', 1, 1, '2023-01-25 18:38:01', '2023-01-25 18:38:52');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `classes`
 --
 
@@ -73,6 +107,27 @@ CREATE TABLE `classes` (
 INSERT INTO `classes` (`id`, `class_name`, `incharge_id`, `insert_by`, `update_by`, `insert_at`, `update_at`) VALUES
 (3, 'MCA', 1, 1, '2023-01-24 17:42:33', '2023-01-24 17:42:33', NULL),
 (4, 'MBA', 3, 1, '2023-01-24 17:44:20', '2023-01-24 17:44:20', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `results`
+--
+
+CREATE TABLE `results` (
+  `id` int(11) NOT NULL,
+  `subject_id` int(11) NOT NULL,
+  `class_id` int(11) DEFAULT NULL,
+  `student_id` int(11) DEFAULT NULL,
+  `type` varchar(255) NOT NULL DEFAULT 'Test',
+  `obtained_marks` int(11) DEFAULT NULL,
+  `total_marks` int(11) DEFAULT NULL,
+  `result` varchar(155) DEFAULT NULL,
+  `insert_by` int(11) DEFAULT NULL,
+  `update_by` int(11) DEFAULT NULL,
+  `insert_at` timestamp NULL DEFAULT current_timestamp(),
+  `update_at` timestamp NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -131,8 +186,8 @@ CREATE TABLE `student` (
 --
 
 INSERT INTO `student` (`student_id`, `student_roll_no`, `class_id`, `student_name`, `student_email`, `student_phone`, `student_psw`, `insert_by`, `insert_at`, `update_by`, `update_at`, `status`) VALUES
-(1, 1, 3, 'kapil', 'kapil@gmail.com', '1234567890', '123456', 1, 0, 1, 2023, 'active'),
-(2, 2, 3, 'sweety', 'sweety@gmail.com', '1234567890', '123456', 1, 0, 0, 0, 'active');
+(1001, 20221703, 3, 'kapil', 'kapil@gmail.com', '1234567890', '123456', 1, 0, 1, 2023, 'active'),
+(1002, 20221729, 3, 'himanshu', 'himanshu@gmail.com', '1234567891', '123456', 1, 0, 0, 0, 'active');
 
 -- --------------------------------------------------------
 
@@ -185,6 +240,22 @@ CREATE TABLE `topic` (
 INSERT INTO `topic` (`topic_id`, `class_id`, `subject_id`, `topic_title`, `topic_content`, `insert_by`, `update_by`, `insert_at`, `update_at`) VALUES
 (3, 3, 3, 'What is Java?', '<h2 class=\"h2\" style=\"-webkit-text-stroke-width:0px;background-color:rgb(255, 255, 255);color:rgb(97, 11, 56);font-family:erdana, helvetica, arial, sans-serif;font-size:25px;font-style:normal;font-variant-caps:normal;font-variant-ligatures:normal;font-weight:400;letter-spacing:normal;line-height:1.3em;orphans:2;text-align:justify;text-decoration-color:initial;text-decoration-style:initial;text-decoration-thickness:initial;text-indent:0px;text-transform:none;white-space:normal;widows:2;word-spacing:0px;\" id=\"what-is-java\">What is Java?</h2><p style=\"-webkit-text-stroke-width:0px;background-color:rgb(255, 255, 255);color:rgb(51, 51, 51);font-family:inter-regular, system-ui, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;font-size:16px;font-style:normal;font-variant-caps:normal;font-variant-ligatures:normal;font-weight:400;letter-spacing:normal;orphans:2;text-align:justify;text-decoration-color:initial;text-decoration-style:initial;text-decoration-thickness:initial;text-indent:0px;text-transform:none;white-space:normal;widows:2;word-spacing:0px;\">Java is a <strong style=\"font-family:inter-bold, system-ui, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;\">programming language</strong> and a <strong style=\"font-family:inter-bold, system-ui, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;\">platform</strong>. Java is a high level, robust, object-oriented and secure programming language.</p><p style=\"-webkit-text-stroke-width:0px;background-color:rgb(255, 255, 255);color:rgb(51, 51, 51);font-family:inter-regular, system-ui, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;font-size:16px;font-style:normal;font-variant-caps:normal;font-variant-ligatures:normal;font-weight:400;letter-spacing:normal;orphans:2;text-align:justify;text-decoration-color:initial;text-decoration-style:initial;text-decoration-thickness:initial;text-indent:0px;text-transform:none;white-space:normal;widows:2;word-spacing:0px;\">Java was developed by <i>Sun Microsystems</i> (which is now the subsidiary of Oracle) in the year 1995. <i>James Gosling</i> is known as the father of Java. Before Java, its name was <i>Oak</i>. Since Oak was already a registered company, so James Gosling and his team changed the name from Oak to Java.</p><p style=\"-webkit-text-stroke-width:0px;background-color:rgb(255, 255, 255);color:rgb(51, 51, 51);font-family:inter-regular, system-ui, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;font-size:16px;font-style:normal;font-variant-caps:normal;font-variant-ligatures:normal;font-weight:400;letter-spacing:normal;orphans:2;text-align:justify;text-decoration-color:initial;text-decoration-style:initial;text-decoration-thickness:initial;text-indent:0px;text-transform:none;white-space:normal;widows:2;word-spacing:0px;\"><strong style=\"font-family:inter-bold, system-ui, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;\">Platform</strong>: Any hardware or software environment in which a program runs, is known as a platform. Since Java has a runtime environment (JRE) and API, it is called a platform.</p><h2 class=\"h2\" style=\"-webkit-text-stroke-width:0px;background-color:rgb(255, 255, 255);color:rgb(97, 11, 56);font-family:erdana, helvetica, arial, sans-serif;font-size:25px;font-style:normal;font-variant-caps:normal;font-variant-ligatures:normal;font-weight:400;letter-spacing:normal;line-height:1.3em;orphans:2;text-align:justify;text-decoration-color:initial;text-decoration-style:initial;text-decoration-thickness:initial;text-indent:0px;text-transform:none;white-space:normal;widows:2;word-spacing:0px;\" id=\"wjiu\">Application</h2><p style=\"-webkit-text-stroke-width:0px;background-color:rgb(255, 255, 255);color:rgb(51, 51, 51);font-family:inter-regular, system-ui, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;font-size:16px;font-style:normal;font-variant-caps:normal;font-variant-ligatures:normal;font-weight:400;letter-spacing:normal;orphans:2;text-align:justify;text-decoration-color:initial;text-decoration-style:initial;text-decoration-thickness:initial;text-indent:0px;text-transform:none;white-space:normal;widows:2;word-spacing:0px;\">According to Sun, 3 billion devices run Java. There are many devices where Java is currently used. Some of them are as follows:</p><ol><li class=\"points\" style=\"-webkit-text-stroke-width:0px;background-color:rgb(255, 255, 255);color:rgb(51, 51, 51);font-family:inter-regular, system-ui, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;font-size:16px;font-style:normal;font-variant-caps:normal;font-variant-ligatures:normal;font-weight:400;letter-spacing:normal;orphans:2;text-align:justify;text-decoration-color:initial;text-decoration-style:initial;text-decoration-thickness:initial;text-indent:0px;text-transform:none;white-space:normal;widows:2;word-spacing:0px;\">Desktop Applications such as acrobat reader, media player, antivirus, etc.</li><li class=\"points\" style=\"-webkit-text-stroke-width:0px;background-color:rgb(255, 255, 255);color:rgb(51, 51, 51);font-family:inter-regular, system-ui, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;font-size:16px;font-style:normal;font-variant-caps:normal;font-variant-ligatures:normal;font-weight:400;letter-spacing:normal;orphans:2;text-align:justify;text-decoration-color:initial;text-decoration-style:initial;text-decoration-thickness:initial;text-indent:0px;text-transform:none;white-space:normal;widows:2;word-spacing:0px;\">Web Applications such as irctc.co.in, javatpoint.com, etc.</li><li class=\"points\" style=\"-webkit-text-stroke-width:0px;background-color:rgb(255, 255, 255);color:rgb(51, 51, 51);font-family:inter-regular, system-ui, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;font-size:16px;font-style:normal;font-variant-caps:normal;font-variant-ligatures:normal;font-weight:400;letter-spacing:normal;orphans:2;text-align:justify;text-decoration-color:initial;text-decoration-style:initial;text-decoration-thickness:initial;text-indent:0px;text-transform:none;white-space:normal;widows:2;word-spacing:0px;\">Enterprise Applications such as banking applications.</li><li class=\"points\" style=\"-webkit-text-stroke-width:0px;background-color:rgb(255, 255, 255);color:rgb(51, 51, 51);font-family:inter-regular, system-ui, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;font-size:16px;font-style:normal;font-variant-caps:normal;font-variant-ligatures:normal;font-weight:400;letter-spacing:normal;orphans:2;text-align:justify;text-decoration-color:initial;text-decoration-style:initial;text-decoration-thickness:initial;text-indent:0px;text-transform:none;white-space:normal;widows:2;word-spacing:0px;\">Mobile</li><li class=\"points\" style=\"-webkit-text-stroke-width:0px;background-color:rgb(255, 255, 255);color:rgb(51, 51, 51);font-family:inter-regular, system-ui, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;font-size:16px;font-style:normal;font-variant-caps:normal;font-variant-ligatures:normal;font-weight:400;letter-spacing:normal;orphans:2;text-align:justify;text-decoration-color:initial;text-decoration-style:initial;text-decoration-thickness:initial;text-indent:0px;text-transform:none;white-space:normal;widows:2;word-spacing:0px;\">Embedded System</li><li class=\"points\" style=\"-webkit-text-stroke-width:0px;background-color:rgb(255, 255, 255);color:rgb(51, 51, 51);font-family:inter-regular, system-ui, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;font-size:16px;font-style:normal;font-variant-caps:normal;font-variant-ligatures:normal;font-weight:400;letter-spacing:normal;orphans:2;text-align:justify;text-decoration-color:initial;text-decoration-style:initial;text-decoration-thickness:initial;text-indent:0px;text-transform:none;white-space:normal;widows:2;word-spacing:0px;\">Smart Card</li><li class=\"points\" style=\"-webkit-text-stroke-width:0px;background-color:rgb(255, 255, 255);color:rgb(51, 51, 51);font-family:inter-regular, system-ui, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;font-size:16px;font-style:normal;font-variant-caps:normal;font-variant-ligatures:normal;font-weight:400;letter-spacing:normal;orphans:2;text-align:justify;text-decoration-color:initial;text-decoration-style:initial;text-decoration-thickness:initial;text-indent:0px;text-transform:none;white-space:normal;widows:2;word-spacing:0px;\">Robotics</li><li class=\"points\" style=\"-webkit-text-stroke-width:0px;background-color:rgb(255, 255, 255);color:rgb(51, 51, 51);font-family:inter-regular, system-ui, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;font-size:16px;font-style:normal;font-variant-caps:normal;font-variant-ligatures:normal;font-weight:400;letter-spacing:normal;orphans:2;text-align:justify;text-decoration-color:initial;text-decoration-style:initial;text-decoration-thickness:initial;text-indent:0px;text-transform:none;white-space:normal;widows:2;word-spacing:0px;\">Games, etc.</li></ol>', NULL, NULL, '2023-01-24 18:39:04', '2023-01-24 18:39:04');
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `work`
+--
+
+CREATE TABLE `work` (
+  `id` int(11) NOT NULL,
+  `class_id` int(11) DEFAULT NULL,
+  `subject_id` int(11) DEFAULT NULL,
+  `date` timestamp NULL DEFAULT current_timestamp(),
+  `due_date` varchar(50) DEFAULT 'Not mention.',
+  `title` text DEFAULT 'Not mention.',
+  `description` text DEFAULT 'Not mention.'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
 --
 -- Indexes for dumped tables
 --
@@ -196,22 +267,36 @@ ALTER TABLE `admin`
   ADD PRIMARY KEY (`admin_id`);
 
 --
+-- Indexes for table `attendance`
+--
+ALTER TABLE `attendance`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `classes`
 --
 ALTER TABLE `classes`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `results`
+--
+ALTER TABLE `results`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `staff`
 --
 ALTER TABLE `staff`
-  ADD PRIMARY KEY (`staff_id`);
+  ADD PRIMARY KEY (`staff_id`),
+  ADD UNIQUE KEY `staff_email` (`staff_email`,`staff_phone`);
 
 --
 -- Indexes for table `student`
 --
 ALTER TABLE `student`
-  ADD PRIMARY KEY (`student_id`);
+  ADD PRIMARY KEY (`student_id`),
+  ADD UNIQUE KEY `student_email` (`student_email`,`student_phone`);
 
 --
 -- Indexes for table `subject`
@@ -226,6 +311,12 @@ ALTER TABLE `topic`
   ADD PRIMARY KEY (`topic_id`);
 
 --
+-- Indexes for table `work`
+--
+ALTER TABLE `work`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -236,10 +327,22 @@ ALTER TABLE `admin`
   MODIFY `admin_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
+-- AUTO_INCREMENT for table `attendance`
+--
+ALTER TABLE `attendance`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+
+--
 -- AUTO_INCREMENT for table `classes`
 --
 ALTER TABLE `classes`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `results`
+--
+ALTER TABLE `results`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `staff`
@@ -251,7 +354,7 @@ ALTER TABLE `staff`
 -- AUTO_INCREMENT for table `student`
 --
 ALTER TABLE `student`
-  MODIFY `student_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `student_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1003;
 
 --
 -- AUTO_INCREMENT for table `subject`
@@ -264,6 +367,12 @@ ALTER TABLE `subject`
 --
 ALTER TABLE `topic`
   MODIFY `topic_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `work`
+--
+ALTER TABLE `work`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
