@@ -2,57 +2,88 @@
 include "header.php";
 $cls = "";
 if (!isset($_GET['date'])) {
-    $d = new DateTime();
-    $date = $d->format('Y-m-d');
+$d = new DateTime();
+$date = $d->format('Y-m-d');
 } else
-    $date = $_GET['date'];
+$date = $_GET['date'];
 if (!isset($_GET['time'])) {
-    $time = date("H:i");
+$time = date("H:i");
 } else
-    $time = $_GET['time'];
+$time = $_GET['time'];
 
 
-if (isset($_GET['attend']) && isset($_GET['date']) && isset($_GET['stid'])) {
-    $date = $_GET['date'];
-    $cls = $_GET['cls'];
-    $stid = $_GET['stid'];
-    $attend = $_GET['attend'];
-    $subj = $_GET['subj'];
-    $insertby = $_SESSION['staff_id'];
-
-    if (isset($_GET['op'])&&$_GET['op'] == "insert") {
-        $sql = "INSERT INTO `attendance` (`student_id`, `class_id`, `subject_id`, `teacher_id`, `class_time`, `date`, `attendance`, `insert_by`)
-            VALUES ($stid,$cls,$subj,$insertby,'$time','$date','$attend',$insertby)";
-
-if (!mysqli_query($conn, $sql)) {
-    echo '<script>swal("Status!","Error!!.","error"); </script>';
+if (isset($_GET['title'])) {
+$title = $_GET['title'];
 } else {
-    $atid = mysqli_insert_id($conn);
-    ?>
-    <script>swal("Status!", "Attendance Added.", "success").then(function () {
-            window.location = "manage-attendance.php?cls=<?= $cls ?>&stid=<?= $stid ?>&date=<?= $date ?>&subj=<?= $subj ?>&time=<?= $time ?>&attend=Present&atid<?= $atid ?>"
-        }); </script>
-    <?php
+$title = "";
+}
+if (isset($_GET['type'])) {
+$type = $_GET['type'];
+} else {
+$type = "";
+}
+if (isset($_GET['obtained_marks'])) {
+$obtained_marks = $_GET['obtained_marks'];
+} else {
+$obtained_marks = "";
+}
+if (isset($_GET['total_marks'])) {
+$total_marks = $_GET['total_marks'];
+} else {
+$total_marks = "";
+}
+if (isset($_GET['result'])) {
+$result = $_GET['result'];
+} else {
+$result = "";
+}
+
+if (isset($_GET['stid'])) {
+$date = $_GET['date'];
+$cls = $_GET['cls'];
+$stid = $_GET['stid'];
+$subj = $_GET['subj'];
+$insertby = $_SESSION['staff_id'];
+
+if (isset($_GET['smt'])&& isset($_GET['rid'])) {
+$rid = $_GET['rid'];
+$sql = "UPDATE `results` SET `subject_id`='$subj',`class_id`='$cls',`student_id`='$stid',`type`='$type',`title`='$title',`obtained_marks`='$obtained_marks',`total_marks`='$total_marks',`result`='$result',`update_by`='$insertby',`update_at`=current_timestamp() WHERE id=$rid";
+if (!mysqli_query($conn, $sql)) {
+echo '<script>swal("Status!", "Error!!.", "error"); </script>';
+} else { 
+?>
+<script>swal("Status!", "Result Updated.", "success").then(function () {
+        window.location = "manage-test.php?cls=<?= $cls ?>&stid=<?= $stid ?>&type=<?=$type?>&date=<?= $date ?>&title=<?=$title?>&obtained_marks=<?=$obtained_marks?>&total_marks=<?=$total_marks?>&result=<?=$result?>&subj=<?= $subj ?>&time=<?= $time ?>&rid=<?= $rid ?>"
+    });  </script>
+<?php
+}
+
+} else if (isset($_GET['smt'])) {
+$sql = "INSERT INTO `results`(  `subject_id`, `class_id`, `student_id`, `type`, `title`,  `obtained_marks`, `total_marks`, `result`, `insert_by`,   `insert_at` ) VALUES ('$subj','$cls','$stid','$type','$title','$obtained_marks','$total_marks','$result','$insertby',current_timestamp())";
+if (!mysqli_query($conn, $sql)) {
+echo '<script>swal("Status!","Error!!.","error"); </script>';
+} else {
+$rid = mysqli_insert_id($conn);
+?>
+<script>swal("Status!", "Result Inserted.", "success").then(function () {
+        window.location = "manage-test.php?cls=<?= $cls ?>&stid=<?= $stid ?>&type=<?=$type?>&date=<?= $date ?>&title=<?=$title?>&obtained_marks=<?=$obtained_marks?>&total_marks=<?=$total_marks?>&result=<?=$result?>&subj=<?= $subj ?>&time=<?= $time ?>&rid=<?= $rid ?>"
+    }); </script>
+<?php
 }
 }
-else if (isset($_GET['op'])&&$_GET['op'] == "update") {
-        $atid=$_GET['atid'];
-        $sql="UPDATE `attendance` SET `student_id`='$stid',`class_id`='$cls',`subject_id`='$subj',`teacher_id`='$insertby',`class_time`='$time',`date`='$date',`attendance`='$attend',`update_by`='$insertby',`update_at`=current_timestamp() WHERE id=$atid";
 
-    
-        if (!mysqli_query($conn, $sql)) {
-            echo '<script>swal("Status!","Error!!.","error"); </script>';
-        } else {
-            $atid = mysqli_insert_id($conn);
-            ?>
-            <script>swal("Status!", "Attendance Updated.", "success").then(function () {
-                    window.location = "manage-attendance.php?cls=<?= $cls ?>&stid=<?= $stid ?>&date=<?= $date ?>&subj=<?= $subj ?>&time=<?= $time ?>&attend=Present&atid<?= $atid ?>"
-                }); </script>
-            <?php
-        }}
+if(isset($_GET['rid'])){
+$id=  $_GET['rid'];
+$st_res = "SELECT * FROM results WHERE id=$id"; 
+$st_res = mysqli_query($conn, $st_res);
+$st_res = mysqli_fetch_assoc($st_res);
+$title=$st_res['title'];
+$type=$st_res['type'];
+$obtained_marks=$st_res['obtained_marks'];
+$total_marks=$st_res['total_marks'];
+$result=$st_res['result'];
 
-   
-
+}
 }
 ?>
 <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
@@ -68,8 +99,7 @@ else if (isset($_GET['op'])&&$_GET['op'] == "update") {
                         <a href="manage-test.php">
                             <div
                                 class="icon icon-lg icon-shape bg-gradient-primary  shadow-dark text-center border-radius-xl mt-n4 position-absolute">
-                                <i class="material-icons opacity-10">Manage Test/Result
-</i>
+                                <i class="material-icons opacity-10">Manage Test</i>
                             </div>
                             <div class="text-end pt-1">
                                 <p class="text-sm mb-0 text-capitalize">
@@ -77,28 +107,30 @@ else if (isset($_GET['op'])&&$_GET['op'] == "update") {
                                 </p>
 
                                 <h4 class="mb-0">
-                                    Delcare Student Test/Result
+                                    Delcare Student Test
                                 </h4>
                         </a>
                     </div>
                 </div>
                 <hr class="dark horizontal my-0">
                 <div class="card-footer p-3">
-                    <p class="mb-0"><span class="text-success text-sm font-weight-bolder">View</span> Attendance</p>
+                    <p class="mb-0"><span class="text-success text-sm font-weight-bolder"> Delcare</span> Student
+                        Test </p>
                 </div>
             </div>
         </div>
         <div class="col-md-12 mb-lg-0 mb-4">
             <div class="card mt-4">
                 <div class="card-header pb-0 p-3">
-                    <div class="row">
+                    <di class="row">
                         <div class="col-md-12 mb-md-0 mb-4">
                             <div class="card card-body border card-plain border-radius-lg  ">
                                 <h6 class="mb-0">Student Record By Class</h6>
                                 <div>
                                     <form method="get">
                                         <div class="mb-3">
-                                            <label class="form-label">Select Class</label>
+                                            <label class="form-label">Select Class <span
+                                                    style="color: red;">*</span></label>
                                             <select name="cls" class="form-control form-control-lg"
                                                 onchange="getSubject(this)" required>
                                                 <option value="">select</option>
@@ -108,113 +140,110 @@ else if (isset($_GET['op'])&&$_GET['op'] == "update") {
                                                 $sql = "SELECT * FROM `classes`";
                                                 $sql = mysqli_query($conn, $sql);
                                                 while ($row = mysqli_fetch_assoc($sql)) {
-                                                    if (isset($_GET['cls'])) {
-                                                        $class = $_GET['cls'];
-                                                        if ($row['id'] == $class) {
-                                                            $class_name = $row['class_name'];
-                                                        }
-                                                    }
-                                                    ?>
-                                                    <option value="<?= $row['id'] ?>" <?php if ($row['id'] == $class)
-                                                          echo "selected  " ?>>
-                                                        <?= $row['class_name'] ?></option>
+                                                if (isset($_GET['cls'])) {
+                                                $class = $_GET['cls'];
+                                                if ($row['id'] == $class) {
+                                                $class_name = $row['class_name'];
+                                                }
+                                                }
+                                                ?>
+                                                <option value="<?= $row['id'] ?>" <?php if ($row['id']==$class)
+                                                    echo "selected  " ?>>
+                                                    <?= $row['class_name'] ?>
+                                                </option>
                                                 <?php } ?>
 
                                             </select>
                                         </div>
-                                        <div class="mb-3">
-                                            <label class="form-label">Select Date
-                                                <span style="color: red;">*</span></label>
-                                            <input type="date" value="<?= $date ?>" name="date" required />
-                                        </div>
-                                        <div class="mb-3">
-                                            <label class="form-label">Select Time
-                                                <span style="color: red;">*</span></label>
-                                            <input type="time" value="<?= $time ?>" name="time" required />
-                                        </div>
 
 
-                                </div>
-                                <div class="mb-3">
-                                    <label class="form-label">Select Subject</label>
-                                    <select name="subj" class="form-control form-control-lg" id="subj" required>
-                                        <option value="">select</option>
-                                        <?php
-                                        $subject_name = "";
-                                        $subj = "";
-                                        $cls = "";
-                                        $sql = "SELECT * FROM `subject`";
-                                        if (isset($_GET['cls'])) {
-                                            $cls = $_GET['cls'];
-                                            $sql .= "  WHERE class_id=$cls";
-                                        }
-                                        $sql = mysqli_query($conn, $sql);
-                                        while ($row = mysqli_fetch_assoc($sql)) {
-                                            if (isset($_GET['subj'])) {
+
+                                        <div class="mb-3">
+                                            <label class="form-label">Select Subject<span
+                                                    style="color: red;">*</span></label>
+                                            <select name="subj" class="form-control form-control-lg" id="subj" required>
+                                                <option value="">select</option>
+                                                <?php
+                                                $subject_name = "";
+                                                $subj = "";
+                                                $cls = "";
+                                                $sql = "SELECT * FROM `subject`";
+                                                if (isset($_GET['cls'])) {
+                                                $cls = $_GET['cls'];
+                                                $sql .= "  WHERE class_id=$cls";
+                                                }
+                                                $sql = mysqli_query($conn, $sql);
+                                                while ($row = mysqli_fetch_assoc($sql)) {
+                                                if (isset($_GET['subj'])) {
                                                 $subj = $_GET['subj'];
                                                 if ($row['id'] == $subj) {
-                                                    $subject_name = $row['subject_name'];
+                                                $subject_name = $row['subject_name'];
                                                 }
-                                            }
-                                            ?>
-                                            <option value="<?= $row['id'] ?>" <?php if ($row['id'] == $subj)
-                                                  echo "selected  " ?>>
-                                                <?= $row['subject_name'] ?></option>
-                                        <?php } ?>
+                                                }
+                                                ?>
+                                                <option value="<?= $row['id'] ?>" <?php if ($row['id']==$subj)
+                                                    echo "selected  " ?>>
+                                                    <?= $row['subject_name'] ?>
+                                                </option>
+                                                <?php } ?>
 
-                                    </select>
+                                            </select>
+                                        </div>
+                                        <div class="mb-3 text-end">
+                                            <?php if (!isset($_GET['cls']) || !isset($_GET['subj'])) { ?>
+                                            <!-- #region --> <button type="submit" class="btn bg-gradient-primary mb-0"
+                                                href="javascript:;"><i class="material-icons text-sm"></i>Show
+                                                Student</button>
+                                        </div>
+                                    </form>
+                                    <?php
+                                                } else { ?>
+                                    <a href="manage-test.php" class="btn bg-gradient-warning mb-0"
+                                        href="javascript:;"><i class="material-icons text-sm"></i>Reset</a>
                                 </div>
-                                <div class="mb-3 text-end">
-                                    <button type="submit" class="btn bg-gradient-primary mb-0" href="javascript:;"><i
-                                            class="material-icons text-sm"></i>Show Student</button>
-                                </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
+                                <?php }   ?>
 
+                                <?php if (isset($_GET['cls']) || isset($_GET['subj'])) {
+                                                ?>
 
-                    <!-- <div class="col-6 text-end">
-                      <a class="btn bg-gradient-dark mb-0" href="javascript:;"><i class="material-icons text-sm"></i>Add Event</a>
-                    </div> -->
-                </div>
+                                <div class="col-md-12 mb-md-0 mb-4">
+                                    <div class="card card-body border card-plain border-radius-lg  ">
+                                        <h6 class="mb-0">Students For Class <span style="color:green">
+                                                <?= $class_name ?>
+                                            </span></h6>
 
-                <div class="card-body p-3 m-1">
-                    <div class="col-6 d-flex align-items-center">
-                        <h6 class="mb-0">Selected Class Student List</h6>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12 mb-md-0 mb-4">
-                            <div class="card card-body border card-plain border-radius-lg  ">
-                                <h6 class="mb-0">Students For Class <span style="color:green">
-                                        <?= $class_name ?>
-                                    </span></h6>
+                                        <hr>
 
-                                <hr>
-
-                                <div>
-                                    <!-- table of student -->
-                                    <table class="table table-striped d-tbl" style="width:100%">
-                                        <thead>
-                                            <tr>
-                                                <th> Roll No</th>
-                                                <th> Name</th>
-                                                <th> Email</th>
-                                                <th> Phone</th>
-                                                <th> Action</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <?php
-                                            if (isset($_GET['cls']) && !empty($_GET['cls'])) {
+                                        <div>
+                                            <!-- table of student -->
+                                            <table class="table table-striped d-tbl" style="width:100%">
+                                                <thead>
+                                                    <tr>
+                                                        <th> Roll No</th>
+                                                        <th> Name</th>
+                                                        <th> Email</th>
+                                                        <th> Phone</th>
+                                                        <th> Action</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <?php
+                                                if (isset($_GET['cls']) && !empty($_GET['cls'])) {
 
                                                 $class = $_GET['cls'];
                                                 $cls = $_GET['cls'];
+
+
                                                 $sql = "SELECT * FROM student WHERE class_id=$class";
+                                                if (isset($_GET['stid'])) {
+                                                $stid = $_GET['stid'];
+                                                $sql .= "  AND student_id=$stid";
+
+                                                }
                                                 $sql = mysqli_query($conn, $sql);
 
                                                 while ($row = mysqli_fetch_assoc($sql)) {
-                                                    ?>
+                                                ?>
                                                     <tr>
                                                         <td>
                                                             <?= $row['student_roll_no'] ?>
@@ -229,164 +258,218 @@ else if (isset($_GET['op'])&&$_GET['op'] == "update") {
                                                             <?= $row['student_phone'] ?>
                                                         </td>
                                                         <td>
-                                                            <a class="btn  bg-gradient-success"
-                                                                href="manage-attendance.php?cls=<?= $cls ?>&stid=<?= $row['student_id'] ?>&date=<?= $date ?>&subj=<?= $subj ?>&time=<?= $time ?>&attend=Present&op=insert">Present</a>
-                                                            <a class="btn  bg-gradient-danger"
-                                                                href="manage-attendance.php?cls=<?= $cls ?>&stid=<?= $row['student_id'] ?>&date=<?= $date ?>&subj=<?= $subj ?>&time=<?= $time ?>&attend=Absent&op=insert">Absent</a>
+                                                            <?php
+                                                if (isset($_GET['stid'])) {
+                                                ?>
                                                             <a class="btn  bg-gradient-warning"
-                                                                href="manage-attendance.php?cls=<?= $cls ?>&stid=<?= $row['student_id'] ?>&date=<?= $date ?>&subj=<?= $subj ?>&time=<?= $time ?>&attend=leave&op=insert">leave</a>
+                                                                href="manage-test.php?cls=<?= $cls ?>&date=<?= $date ?>&subj=<?= $subj ?>&time=<?= $time ?>">un-select</a>
+
+                                                            <?php
+                                                } else {
+                                                ?>
+                                                            <a class="btn  bg-gradient-success"
+                                                                href="manage-test.php?cls=<?= $cls ?>&stid=<?= $row['student_id'] ?>&date=<?= $date ?>&subj=<?= $subj ?>&time=<?= $time ?>">select</a>
+
+                                                            <?php
+                                                }
+                                                ?>
                                                         </td>
                                                     </tr>
                                                     <?php
                                                 }
-                                            }
-                                            ?>
+                                                }
+                                                ?>
 
-                                        </tbody>
-                                    </table>
-                                    <!-- table of student end -->
+                                                </tbody>
+                                            </table>
+                                            <!-- table of student end -->
 
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
 
-                </div>
+                                <?php } ?>
 
-                <div class="card-body p-3 m-1">
-                    <div class="col-6 d-flex align-items-center">
-                        <h6 class="mb-0">Attendance Table</h6>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12 mb-md-0 mb-4">
-                            <div class="card card-body border card-plain border-radius-lg  ">
-                                <h6 class="mb-0">Attendance For  <span style="color:green">
-                                        <?= $class_name ?> 
-                                    </span> And Subject 
-                                    <span style="color:green">
-                                        <?= $subject_name ?> 
-                                    </span>
-                                </h6>
+                                <div style="margin-top: 20px;">
+                                    <div class="mb-3" style="display: inline-block;">
+                                        <label class="form-label">Select Date
+                                            <span style="color: red;">*</span></label>
+                                        <input type="date" value="<?= $date ?>" name="date" required />
+                                    </div>
+                                    <div class="mb-3" style="display: inline-block;">
+                                        <label class="form-label">Select Time
+                                            <span style="color: red;">*</span></label>
+                                        <input type="time" value="<?= $time ?>" name="time" required />
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Title
+                                        <span style="color: red;">*</span></label>
+                                    <input type="text" class="form-control form-control-lg" value="<?=$title?>"
+                                        name="title" placeholder="Title" required />
+                                </div>
 
-                                <hr>
+                                <div class="mb-3">
+                                    <label class="form-label">Obtained Marks
+                                        <span style="color: red;">*</span></label>
+                                    <input type="number" class="form-control form-control-lg"
+                                        value="<?=$obtained_marks?>" name="obtained_marks" placeholder="Remark"
+                                        required />
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Total Marks
+                                        <span style="color: red;">*</span></label>
+                                    <input type="number" class="form-control form-control-lg" value="<?=$total_marks?>"
+                                        name="total_marks" placeholder="Remark" required />
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Declare Test Result Type
+                                        <span style="color: red;">*</span></label>
+                                    <input type="text" class="form-control form-control-lg" value="<?=$type?>"
+                                        name="type" placeholder="Type" required />
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Test Result
+                                        <span style="color: red;">*</span></label>
+                                    <select class="form-control form-control-lg" name="result" required>
+                                        <option value="" <?php if($result=="" )echo"selected"; ?>>select</option>
+                                        <option value="Re-apper" <?php if($result=="Re-apper" )echo"selected"; ?>
+                                            >Re-apper</option>
+                                        <option value="Qualified" <?php if($result=="Qualified" )echo"selected"; ?>
+                                            >Qualified</option>
+                                        <option value="RLA" <?php if($result=="RLA" )echo"selected"; ?>>RLA</option>
+                                    </select>
+                                </div>
 
-                                <div>
-                                    <!-- table of student -->
-                                    <table class="table table-striped d-tbl" style="width:100%">
-                                        <thead>
-                                            <tr>
-                                                <th> Roll No</th>
-                                                <th> Attendance</th>
-                                                <th> Name</th>
-                                                <th> Phone</th>
-                                                <th> Time</th>
-                                                <th> Date</th>
-                                                <th> Subject</th>
-                                                <th> Action | Update</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <?php
-                                            if (isset($_GET['cls']) && !empty($_GET['cls']) && isset($_GET['date']) && !empty($_GET['date'])) {
+                                <?php if (isset($_GET['rid'])) { ?>
+                                <input type="text" style="display: none;" value="<?=$_GET['rid']?>" name="rid" required>
+                                <input type="text" style="display: none;" value="<?=$_GET['stid']?>" name="stid"
+                                    required>
+                                <div class="mb-3 text-end">
+                                    <input type="submit" name="smt" class="btn bg-gradient-success mb-0"
+                                        value="Update Result" />
+                                </div>
+                                <?php } else  if (isset($_GET['stid'])) { ?>
+                                <input type="text" style="display: none;" value="<?=$_GET['stid']?>" name="stid"
+                                    required>
+                                <div class="mb-3 text-end">
+                                    <input type="submit" name="smt" class="btn bg-gradient-success mb-0"
+                                        value="Submit Result" />
+                                </div>
+                                <?php } ?>
+                                </form>
 
+
+
+
+                                <div class="col-md-12 mb-md-0 mb-4">
+                                    <div class="card card-body border card-plain border-radius-lg  ">
+                                        <h6 class="mb-0">Students For Class <span style="color:green">
+                                                <?= $class_name ?>
+                                            </span></h6>
+
+                                        <hr>
+
+                                        <div>
+                                            <!-- table of student -->
+                                            <table class="table table-striped d-tbl" style="width:100%">
+                                                <thead>
+                                                    <tr>
+                                                        <th> Roll No</th>
+                                                        <th> Name</th>
+                                                        <th> Class</th>
+                                                        <th> Subject</th>
+                                                        <th> Action</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <?php
+
+                                                $sql = "SELECT * FROM results";
+                                                if(isset($_GET['cls'])){
                                                 $class = $_GET['cls'];
-                                                $cls = $_GET['cls'];
-                                                $sql = "SELECT * FROM attendance WHere class_id=$cls";
-
-
-                                                if (isset($_GET['date'])) {
-                                                    $sql .= "   AND date='$date' ";
+                                                $cls = $_GET['cls'];  
+                                                $sql = "SELECT * FROM results WHERE class_id=$class";
+                                                if (isset($_GET['stid'])) { 
+                                                $stid = $_GET['stid'];
+                                                $sql .= "  AND student_id=$stid"; 
                                                 }
-                                                if (isset($_GET['subj'])) {
-                                                    $sql .= "   AND subject_id=$subj";
+                                                if (isset($_GET['subj'])) { 
+                                                $stid = $_GET['subj'];
+                                                $sql .= "  AND subject_id=$stid"; 
                                                 }
+                                                if (isset($_GET['rid'])) { 
+                                                $rid = $_GET['rid'];
+                                                $sql .= "  AND id=$rid"; 
+                                                }
+                                                }
+
 
                                                 $sql = mysqli_query($conn, $sql);
-                                                while ($row = mysqli_fetch_array($sql)) {
 
-                                                    $student_id = $row['student_id'];
+                                                while ($row = mysqli_fetch_assoc($sql)) {
+                                                $r_stid=$row['student_id'];
+                                                $st_sql = "SELECT * FROM student WHERE student_id=$r_stid";
+                                                $st_sql = mysqli_query($conn, $st_sql);
+                                                $st_sql = mysqli_fetch_assoc($st_sql);
 
-                                                    $st_sql = "SELECT * FROM student Where student_id=$student_id";
-                                                    $st_row = mysqli_query($conn, $st_sql);
-                                                    $st_row = mysqli_fetch_assoc($st_row);
-                                                    ?>
+                                                $cls_row = $row['class_id'];
+                                                $cls_row = "SELECT * from classes where id=$cls_row";
+                                                $cls_row = mysqli_query($conn, $cls_row);
+                                                $cls_row = mysqli_fetch_assoc($cls_row);
+
+                                                $subj_row = $row['subject_id'];
+                                                $subj_row = "SELECT * from subject where id=$subj_row";
+                                                $subj_row = mysqli_query($conn, $subj_row);
+                                                $subj_row = mysqli_fetch_assoc($subj_row);
+                                                ?>
                                                     <tr>
                                                         <td>
-                                                            <?= $st_row['student_roll_no'] ?>
+                                                            <?= $st_sql['student_roll_no'] ?>
                                                         </td>
                                                         <td>
-                                                            <?php 
-                                                            
-                                                            switch($row['attendance']){
-                                                                case 'Present': ?><span class="btn  bg-gradient-success"><?=$row['attendance']?></span>
-                                                                <?php
-                                                                break;
-                                                                case 'Absent' ?><span class="btn  bg-gradient-danger"><?=$row['attendance']?></span>
-                                                                <?php
-                                                                break;
-                                                                case 'leave' ?><span class="btn  bg-gradient-warning"><?=$row['attendance']?></span>
-                                                                <?php
-                                                                break;
-                                                            }
-                                                            ?>
+                                                            <?= $st_sql['student_name'] ?>
                                                         </td>
                                                         <td>
-                                                            <?= $st_row['student_name'] ?>
+                                                            <?= $cls_row['class_name'] ?>
                                                         </td>
                                                         <td>
-                                                            <?= $st_row['student_phone'] ?>
-                                                        </td>
-                                                        <td>
-                                                            <?= $row['class_time'] ?>
-                                                        </td>
-                                                        <td>
-                                                            <?= $row['date'] ?>
+                                                            <?= $subj_row['subject_name'] ?>
                                                         </td>
                                                         <td>
                                                             <?php
-                                                            $subject_id = $row['subject_id'];
-                                                            $sb_sql = "SELECT * FROM subject Where id=$subject_id";
-                                                            $sb_row = mysqli_query($conn, $sb_sql);
-                                                            $sb_row = mysqli_fetch_assoc($sb_row);
-                                                            echo $sb_row['subject_name'];
+                                                if (isset($_GET['rid'])) {
+                                                ?>
+                                                            <a class="btn  bg-gradient-warning"
+                                                                href="manage-test.php?cls=<?= $cls ?>&stid=<?= $st_sql['student_id'] ?>&date=<?= $date ?>&cls=<?=$cls_row['id']?>&subj=<?= $subj_row['id'] ?>&time=<?= $time ?>">selected</a>
 
-                                                            ?>
-                                                        </td>
-                                                        <td>
-                                                            <?php if ($row['attendance'] !== "Present") { ?>
-                                                                <a class="btn  bg-gradient-success"
-                                                                    href="manage-attendance.php?cls=<?= $row['class_id'] ?>&stid=<?= $st_row['student_id'] ?>&date=<?= $row['date'] ?>&subj=<?= $row['subject_id'] ?>&time=<?= $row['class_time'] ?>&atid=<?= $row['id'] ?>&attend=Present&op=update">Present</a>
-                                                            <?php }
-                                                            if ($row['attendance'] !== "Absent") { ?>
-                                                                <a class="btn  bg-gradient-danger"
-                                                                    href="manage-attendance.php?cls=<?= $row['class_id'] ?>&stid=<?= $st_row['student_id'] ?>&date=<?= $row['date'] ?>&subj=<?= $row['subject_id'] ?>&time=<?= $row['class_time'] ?>&atid=<?= $row['id'] ?>&attend=Absent&op=update">Absent</a>
-                                                            <?php }
-                                                            if ($row['attendance'] != "leave") { ?>
-                                                                <a class="btn  bg-gradient-warning"
-                                                                    href="manage-attendance.php?cls=<?= $row['class_id'] ?>&stid=<?= $st_row['student_id'] ?>&date=<?= $row['date'] ?>&subj=<?= $row['subject_id'] ?>&time=<?= $row['class_time'] ?>&atid=<?= $row['id'] ?>&attend=leave&op=update">leave</a>
-                                                            <?php } ?>
+                                                            <?php
+                                                } else {
+                                                ?>
+                                                            <a class="btn  bg-gradient-success"
+                                                                href="manage-test.php?cls=<?= $cls ?>&stid=<?= $st_sql['student_id'] ?>&date=<?= $date ?>&cls=<?=$cls_row['id']?>&subj=<?= $subj_row['id'] ?>&time=<?= $time ?>&rid=<?=$row['id']?>">Update</a>
+                                                            <?php
+                                                }
+                                                ?>
                                                         </td>
                                                     </tr>
                                                     <?php
+                                                } 
+                                                ?>
 
-                                                }
-                                            }
-                                            ?>
+                                                </tbody>
+                                            </table>
+                                            <!-- table of student end -->
 
-                                        </tbody>
-                                    </table>
-                                    <!-- table of student end -->
-
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-
                 </div>
-
-
             </div>
         </div>
+    </div>
 
     </div>
 
@@ -395,8 +478,6 @@ else if (isset($_GET['op'])&&$_GET['op'] == "update") {
 
 
 <?php include "footer.php" ?>
-
-
 <script>
 
     function getSubject(event) {
@@ -418,7 +499,6 @@ else if (isset($_GET['op'])&&$_GET['op'] == "update") {
             }
         };
         xhttp.open("POST", "../admin/ajex.php", true);
-        xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-        xhttp.send(data);
+        xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded"); xhttp.send(data);
     }
 </script>

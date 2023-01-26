@@ -42,7 +42,9 @@
     Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
   }
 
-
+  $(document).ready(function () {
+    $(".d-tbl").DataTable();
+  });
 
 
 </script>

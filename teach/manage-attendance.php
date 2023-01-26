@@ -275,11 +275,11 @@ else if (isset($_GET['op'])&&$_GET['op'] == "update") {
                                         <thead>
                                             <tr>
                                                 <th> Roll No</th>
+                                                <th> Time</th>
+                                                <th> Date</th>
                                                 <th> Attendance</th>
                                                 <th> Name</th>
                                                 <th> Phone</th>
-                                                <th> Time</th>
-                                                <th> Date</th>
                                                 <th> Subject</th>
                                                 <th> Action | Update</th>
                                             </tr>
@@ -314,6 +314,12 @@ else if (isset($_GET['op'])&&$_GET['op'] == "update") {
                                                             <?= $st_row['student_roll_no'] ?>
                                                         </td>
                                                         <td>
+                                                            <?= $row['class_time'] ?>
+                                                        </td>
+                                                        <td>
+                                                            <?= $row['date'] ?>
+                                                        </td>
+                                                        <td>
                                                             <?php 
                                                             
                                                             switch($row['attendance']){
@@ -334,12 +340,6 @@ else if (isset($_GET['op'])&&$_GET['op'] == "update") {
                                                         </td>
                                                         <td>
                                                             <?= $st_row['student_phone'] ?>
-                                                        </td>
-                                                        <td>
-                                                            <?= $row['class_time'] ?>
-                                                        </td>
-                                                        <td>
-                                                            <?= $row['date'] ?>
                                                         </td>
                                                         <td>
                                                             <?php

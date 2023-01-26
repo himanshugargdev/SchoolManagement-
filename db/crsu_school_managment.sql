@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 25, 2023 at 08:21 PM
+-- Generation Time: Jan 26, 2023 at 05:56 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.0.25
 
@@ -81,8 +81,10 @@ INSERT INTO `attendance` (`id`, `student_id`, `class_id`, `subject_id`, `teacher
 (17, 1001, 3, 3, 1, '23:40', '2023-01-25', 'Present', 1, 0, '2023-01-25 18:15:38', '2023-01-25 18:15:38'),
 (18, 1002, 3, 3, 1, '23:40', '2023-01-25', 'Absent', 1, 0, '2023-01-25 18:19:31', '2023-01-25 18:19:31'),
 (19, 1002, 3, 3, 1, '23:40', '2023-01-25', 'leave', 1, 0, '2023-01-25 18:19:37', '2023-01-25 18:19:37'),
-(20, 1001, 3, 3, 1, '00:04', '2023-01-26', 'Present', 1, 1, '2023-01-25 18:34:17', '2023-01-25 18:39:07'),
-(21, 1002, 3, 3, 1, '00:04', '2023-01-26', 'Absent', 1, 1, '2023-01-25 18:38:01', '2023-01-25 18:38:52');
+(20, 1001, 3, 3, 1, '00:04', '2023-01-26', 'Absent', 1, 1, '2023-01-25 18:34:17', '2023-01-26 16:53:02'),
+(21, 1002, 3, 3, 1, '00:04', '2023-01-26', 'leave', 1, 1, '2023-01-25 18:38:01', '2023-01-26 16:53:14'),
+(22, 1001, 3, 3, 1, '21:46', '2023-01-25', 'Parsent', 1, 0, '2023-01-26 06:00:27', '2023-01-26 06:00:27'),
+(23, 1001, 3, 3, 1, '11:30', '2023-01-26', 'Present', 1, 1, '2023-01-26 06:16:31', '2023-01-26 06:17:39');
 
 -- --------------------------------------------------------
 
@@ -120,6 +122,7 @@ CREATE TABLE `results` (
   `class_id` int(11) DEFAULT NULL,
   `student_id` int(11) DEFAULT NULL,
   `type` varchar(255) NOT NULL DEFAULT 'Test',
+  `title` varchar(200) DEFAULT NULL,
   `obtained_marks` int(11) DEFAULT NULL,
   `total_marks` int(11) DEFAULT NULL,
   `result` varchar(155) DEFAULT NULL,
@@ -128,6 +131,17 @@ CREATE TABLE `results` (
   `insert_at` timestamp NULL DEFAULT current_timestamp(),
   `update_at` timestamp NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `results`
+--
+
+INSERT INTO `results` (`id`, `subject_id`, `class_id`, `student_id`, `type`, `title`, `obtained_marks`, `total_marks`, `result`, `insert_by`, `update_by`, `insert_at`, `update_at`) VALUES
+(1, 3, 3, 1001, 'Pre-Exam', 'sdf', 33, 333, 'Re-apper', 1, 1, '2023-01-26 11:27:43', '2023-01-26 16:42:25'),
+(2, 3, 3, 1001, 'Pre-Exam', 'sdf', 200, 333, 'Qualified', 1, 1, '2023-01-26 12:09:12', '2023-01-26 16:41:55'),
+(3, 3, 3, 1001, 'UNIT TEST', 'JAVA 1ST UNIT TEST', 20, 30, 'Qualified', 1, NULL, '2023-01-26 12:14:05', '2023-01-26 12:14:05'),
+(4, 3, 3, 1001, '33', 'sdf', 333, 33, 'Qualified', 1, 1, '2023-01-26 12:22:02', '2023-01-26 12:25:28'),
+(5, 3, 3, 1002, 'ddd', 'sddf', 333, 33, 'Re-apper', 1, NULL, '2023-01-26 12:58:02', '2023-01-26 12:58:02');
 
 -- --------------------------------------------------------
 
@@ -264,7 +278,8 @@ CREATE TABLE `work` (
 -- Indexes for table `admin`
 --
 ALTER TABLE `admin`
-  ADD PRIMARY KEY (`admin_id`);
+  ADD PRIMARY KEY (`admin_id`),
+  ADD UNIQUE KEY `admin_email` (`admin_email`,`admin_phone`);
 
 --
 -- Indexes for table `attendance`
@@ -330,7 +345,7 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `attendance`
 --
 ALTER TABLE `attendance`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `classes`
@@ -342,7 +357,7 @@ ALTER TABLE `classes`
 -- AUTO_INCREMENT for table `results`
 --
 ALTER TABLE `results`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `staff`
@@ -354,7 +369,7 @@ ALTER TABLE `staff`
 -- AUTO_INCREMENT for table `student`
 --
 ALTER TABLE `student`
-  MODIFY `student_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1003;
+  MODIFY `student_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1004;
 
 --
 -- AUTO_INCREMENT for table `subject`

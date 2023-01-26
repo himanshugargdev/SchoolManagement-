@@ -144,10 +144,4 @@ include "header.php";
 <?php include "footer.php" ?>
 
 
-<script>
-
-
-  $(document).ready(function () {
-    $(".d-tbl").DataTable();
-  });
-</script>
+ 
