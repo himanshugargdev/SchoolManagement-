@@ -133,7 +133,7 @@ nav {
   height: 85px;
   border-radius: 50%;
 }
-
+/* 
 a {
   position: relative;
   color: rgb(85, 83, 83);
@@ -141,7 +141,7 @@ a {
   display: table;
   padding: 10px;
   width: 300px;
-}
+} */
 
 .fa-solid {
   position: relative;
@@ -365,8 +365,7 @@ input {
   position: relative;
   background: #fff;
   transition: 0.5s;
-  width: 400px;
-  height: 500px;
+  width: 400px; 
   border: 1px solid grey;
   /* margin-top: 50px; */
   border-radius: 10%;
@@ -380,8 +379,8 @@ input {
 }
 
 .box_profile .box_info {
-  display: block;
-  margin: 30px 0px 30px 0;
+  display: block;   
+   margin: 19px 0px 24px 14px;
   padding: 5px;
   line-height: 0px;
 }

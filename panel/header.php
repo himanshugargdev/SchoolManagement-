@@ -21,6 +21,12 @@ if(empty($_SESSION['student_id'])||!isset($_SESSION['student_id'])||!isset($_SES
                 if(mysqli_num_rows($cls_res)>0){ 
                     $cls_row = mysqli_fetch_assoc($cls_res);
                     $class_name = $cls_row['class_name'];
+                    $incharge_id = $cls_row['incharge_id'];
+                    
+                $inc_res=mysqli_query($conn, "SELECT * FROM staff WHERE staff_id=$incharge_id");
+                $inc_res = mysqli_fetch_assoc($inc_res);
+                $Incharge_name = $inc_res['staff_name'];
+                $staff_role = $inc_res['staff_role'];
                 }
                 $_SESSION['student_phone']=$row['student_phone']; 
             }

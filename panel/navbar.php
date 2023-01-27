@@ -35,7 +35,7 @@
                     <span class="nav-item">E-learning</span>
                 </a>
             </li>
-            <li><a href="#">
+            <li><a href="classDetails.php">
                     <i class="fa-sharp fa-solid fa-person-chalkboard"></i>
                     <span class="nav-item">Class Detail</span>
                 </a>

@@ -4,17 +4,30 @@
                 <a href="#" class="logo">
                     <img src="../assets/images/black.png" alt="">
                 </a>
+            </li> 
+            <li><a href="profile.php">
+                    <i class="fa-solid fa-user"></i>
+                    <span class="nav-item ">Profile</span>
+                </a>
             </li>
-
-
-           
-
+                <hr>
+                <center>Study Topic</center>
             <?php
             $sql = "SELECT * FROM topic WHERE class_id=$class";
             if(isset($_GET['subj'])){
                 $sql .=" AND subject_id=$subj";
             }
             $sql = mysqli_query($conn, $sql);
+            if (mysqli_num_rows($sql) <= 0) {
+                ?>
+                
+                <li><a href="learn.php">
+                    <i class="fa-solid fa-user"></i>
+                    <span class="nav-item "> Not Found  </span>
+                </a>
+            </li> 
+                <?php
+            }
             while($row=mysqli_fetch_assoc($sql)){
                     ?>
                 <li><a href="learn.php?class_id=<?=$row['class_id']?>&subj=<?=$row['subject_id']?>&topic=<?=$row['topic_id']?>">
