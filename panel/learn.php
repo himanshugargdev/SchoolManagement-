@@ -1,25 +1,5 @@
 <?php include "header.php"; ?>
-<style>
-    .content-box{ 
-        width:1200px; 
-        margin: auto;
-    }
-    .aj-info-box{   
-        display:inline-block;
-        margin: 5px;
-        padding: 10px;
-        box-shadow: 16px 2px 8px 0px #cecece;
-        border-radius: .4em ;
-    }
-    .aj-info-box ul { 
-        list-style: none;
-    }
-    @media (max-width: 1200px) {
-        .content-box{ 
-        width:500px; 
-    }
-    }
-</style>   
+ 
 <div class="wrapper_learn">
     <div class="container_learn">
 
@@ -114,7 +94,7 @@
                 
                 <li><a href="learn.php">
                     <i class="fa-solid fa-user"></i>
-                    <span class="nav-item ">Content not Found Choose other</span>
+                    <span class="nav-item ">Topic not Found Choose other Subject</span>
                 </a>
             </li> 
                 <?php

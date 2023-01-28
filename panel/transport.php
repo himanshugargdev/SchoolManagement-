@@ -9,114 +9,37 @@ include "navbar.php";
             <div class="personal_transport">
                 <table style="width:100% ;">
                     <tr>
-                        <th>ID</th>
-                        <th class="bus_model">Model</th>
+                        <th>S.No</th> 
                         <th>Bus Number</th>
+                        <th>Driver Name</th>
                         <th>Driver Number</th>
                         <th>Seats</th>
+                        <th>Path</th>
                         <th>Dep Time</th>
                         <th>Bus Fee</th>
 
                     </tr>
                     <tr>
-                        <td>1</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                        <td>1</td> 
+                        <td>HR-31-2345</td>
+                        <td>Raju</td>
+                        <td>+919812343909</td>
+                        <td>40</td>
+                        <td>JIND-JULANA</td>
+                        <td>8:00AM</td>
+                        <td>10/-Rs per KM</td>
 
                     </tr>
                     <tr>
-                        <td>2</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>5</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>7</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>8</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>9</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>10</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>11</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>12</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                        <td>2</td> 
+                        <td>HR-32-2355</td>
+                        <td>Amit</td>
+                        <td>+91979765909</td> 
+                        <td>40</td>
+                        <td>JIND-SHAPUR</td>
+                        <td>8:00AM</td>
+                        <td>10/-Rs per KM</td>
+
                     </tr>
                 </table>
 
