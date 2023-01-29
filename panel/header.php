@@ -16,8 +16,11 @@ if(empty($_SESSION['student_id'])||!isset($_SESSION['student_id'])||!isset($_SES
                 $_SESSION['student_phone']=$row['student_phone']; 
                 $_SESSION['student_roll_no']=$row['student_roll_no'];  
                 $class_id=$row['class_id'];
-                $cls_res=mysqli_query($conn, "SELECT * FROM classes WHERE id=$class_id");
                 $class_name = "";
+                $staff_role = " ";
+                if(!empty($class_id)){
+                    $cls_res=mysqli_query($conn, "SELECT * FROM classes WHERE id=$class_id");
+              
                 if(mysqli_num_rows($cls_res)>0){ 
                     $cls_row = mysqli_fetch_assoc($cls_res);
                     $class_name = $cls_row['class_name'];
@@ -25,10 +28,12 @@ if(empty($_SESSION['student_id'])||!isset($_SESSION['student_id'])||!isset($_SES
                     
                 $inc_res=mysqli_query($conn, "SELECT * FROM staff WHERE staff_id=$incharge_id");
                 $inc_res = mysqli_fetch_assoc($inc_res);
+                
                 $Incharge_name = $inc_res['staff_name'];
                 $staff_role = $inc_res['staff_role'];
-                }
-                $_SESSION['student_phone']=$row['student_phone']; 
+                } 
+                $_SESSION['student_phone']=$row['student_phone'];   
+                } 
             }
  
 ?>

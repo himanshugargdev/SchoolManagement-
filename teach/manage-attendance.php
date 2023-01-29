@@ -94,6 +94,10 @@ else if (isset($_GET['op'])&&$_GET['op'] == "update") {
                         <div class="col-md-12 mb-md-0 mb-4">
                             <div class="card card-body border card-plain border-radius-lg  ">
                                 <h6 class="mb-0">Student Record By Class</h6>
+                                <div class="mb-3 text-end">
+                                    <button type="submit" data-bs-toggle="modal" data-bs-target="#myModal" class="btn bg-gradient-success mb-0" ><i
+                                            class="material-icons text-sm"></i>Leave Request's</button>
+                                </div>
                                 <div>
                                     <form method="get">
                                         <div class="mb-3">
@@ -389,11 +393,68 @@ else if (isset($_GET['op'])&&$_GET['op'] == "update") {
 
     </div>
 
-</main>
-
-
-
+</main> 
 <?php include "footer.php" ?>
+<!-- The Modal -->
+<div class="modal" id="myModal">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content" id="modal_content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h5 class="modal-title">Leave Request List</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+      <table class="table table-striped d-tbl" style="width:100% background:#0000">
+    <thead>
+        <tr>
+            <th> Roll No </th>
+            <th> Name</th>
+            <th> From</th>
+            <th> To</th>
+            <th>Type</th> 
+            <th> Description</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php 
+          $sql = "SELECT * FROM leaves order by id desc"; 
+        $sql = mysqli_query($conn, $sql);
+        while($row = mysqli_fetch_assoc($sql)){
+            ?><tr>
+            <td><?= $row['roll_no'] ?></td>
+            <td><?= $row['student_name'] ?></td>
+                <td><?= $row['from'] ?></td>
+                <td><?= $row['to'] ?></td>
+                <td><?= $row['leave_type'] ?></td> 
+                <td><?= $row['descr'] ?></td> 
+                <th>
+            <select onchange="setLeave('<?=$row['id']?>',this)"> 
+            <option value="Not Seen Yet"  <?= $row['status']=='Not Seen Yet' ?'selected':''?>>Not Seen Yet</option>
+            <option value="rejacted" <?= $row['status']=='rejacted' ?'selected':''?>  >rejacted</option>
+            <option value="accepted"  <?= $row['status']=='accepted' ?'selected':''?>>accepted</option>
+            </select>
+            </th>
+            </tr>
+            <?php
+        }
+        ?>
+    </tbody>
+ </table>
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+      </div>
+
+    </div>
+  </div>
+</div>
 
 
 <script>
@@ -414,6 +475,24 @@ else if (isset($_GET['op'])&&$_GET['op'] == "update") {
                 for (key in data) {
                     $("#subj").append(`<option value='${data[key].id}'>${data[key].subject_name}</option>`)
                 }
+            }
+        };
+        xhttp.open("POST", "../admin/ajex.php", true);
+        xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhttp.send(data);
+    }
+    function setLeave(id,event) {
+        var value = event.value;
+        if (value == "") {
+            return;
+        }
+        var data = "setLeave=" + JSON.stringify({ id,value });
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+
+                var data = JSON.parse(xhttp.response);
+                swal("Status",data.msg,data.state);
             }
         };
         xhttp.open("POST", "../admin/ajex.php", true);

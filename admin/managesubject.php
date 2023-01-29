@@ -104,7 +104,7 @@ if (isset($_GET['subj'])) {
                      if (isset($subj)) {
                      ?>
               <a class="btn bg-gradient-primary mb-0" href="managesubject.php"><i
-                  class="material-icons text-sm"></i>Cancel</a>
+                  class="material-icons text-sm"></i>New</a>
 
               <?php
                      }

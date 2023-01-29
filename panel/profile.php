@@ -7,8 +7,7 @@
         <div class="box_profile"> 
             <center><img src="../assets/images/avtar.png"></center>
             <br>
-            <p  class="box_info"><b>First Name :     </b><span><?= $_SESSION['student_name']?></span></p>
-            <p  class="box_info"><b>Surname :        </b><span><?= $_SESSION['student_name']?></span></p>
+            <p  class="box_info"><b>Name :     </b><span><?= $_SESSION['student_name']?></span></p>
             <p  class="box_info"><b>Adm No. :        </b><span><?=$_SESSION['student_id'] ?></span></p>
             <p  class="box_info"><b>Roll No. :       </b><span><?=$_SESSION['student_roll_no'] ?></span></p>
             <p  class="box_info"><b>Class :          </b><span><?= $class_name?></span></p>

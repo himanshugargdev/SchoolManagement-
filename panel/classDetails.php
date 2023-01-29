@@ -31,12 +31,7 @@
             $sql=mysqli_query($conn, $sql);
             if(mysqli_num_rows($sql)<=0){
 
-                ?>  <div class="aj-info-box">
-                <a href="learn.php">
-                       <i class="fa-solid fa-user"></i>
-                       <span class="nav-item ">Topic not Found Choose other Subject</span>
-                   </a>
-                   </div>
+                ?>  Not Found Subjects.
                 <?php  
                 
             }else{ 

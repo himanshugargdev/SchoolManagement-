@@ -4,7 +4,7 @@ include "navbar.php";
 <div class="wrapper_transport">
     <div class="container_transport"> 
         <div class="box_transport">
-            <h1 class="box_info_transport">See your Bus timing and Details</h1>
+            <h1 class="box_info_transport">Bus timing and Schedule</h1>
             <hr>
             <div class="personal_transport">
                 <table style="width:100% ;">
@@ -23,7 +23,7 @@ include "navbar.php";
                         <td>1</td> 
                         <td>HR-31-2345</td>
                         <td>Raju</td>
-                        <td>+919812343909</td>
+                        <td>+91 9812343909</td>
                         <td>40</td>
                         <td>JIND-JULANA</td>
                         <td>8:00AM</td>
@@ -34,7 +34,7 @@ include "navbar.php";
                         <td>2</td> 
                         <td>HR-32-2355</td>
                         <td>Amit</td>
-                        <td>+91979765909</td> 
+                        <td>+91 9797365909</td> 
                         <td>40</td>
                         <td>JIND-SHAPUR</td>
                         <td>8:00AM</td>

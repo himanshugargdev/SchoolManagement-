@@ -518,8 +518,7 @@ h6 {
 .aj-info-box{   
   display:inline-block;
   margin: 5px;
-  padding: 10px;
-  box-shadow: 16px 2px 8px 0px #cecece;
+  padding: 10px; 
   border-radius: .4em ;
 }
 .aj-info-box ul { 

@@ -95,8 +95,8 @@ if (isset($_GET['cls'])) {
               <?php
                  if (isset($cls)) {
                  ?>
-              <a class="btn bg-gradient-primary mb-0" href="manageclass.php"><i
-                  class="material-icons text-sm"></i>Cancel</a>
+                  <a class="btn bg-gradient-primary mb-0" href="manageclass.php"><i
+                      class="material-icons text-sm"></i>New</a>
               <?php
                  }
                     ?>

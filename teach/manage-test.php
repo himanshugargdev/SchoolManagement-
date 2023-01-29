@@ -47,7 +47,7 @@ $insertby = $_SESSION['staff_id'];
 
 if (isset($_GET['smt'])&& isset($_GET['rid'])) {
 $rid = $_GET['rid'];
-$sql = "UPDATE `results` SET `subject_id`='$subj',`class_id`='$cls',`student_id`='$stid',`type`='$type',`title`='$title',`obtained_marks`='$obtained_marks',`total_marks`='$total_marks',`result`='$result',`update_by`='$insertby',`update_at`=current_timestamp() WHERE id=$rid";
+$sql = "UPDATE `test` SET `subject_id`='$subj',`class_id`='$cls',`student_id`='$stid',`type`='$type',`title`='$title',`obtained_marks`='$obtained_marks',`total_marks`='$total_marks',`result`='$result',`date`='$date',`time`='$time',`update_by`='$insertby',`update_at`=current_timestamp() WHERE id=$rid";
 if (!mysqli_query($conn, $sql)) {
 echo '<script>swal("Status!", "Error!!.", "error"); </script>';
 } else { 
@@ -59,7 +59,7 @@ echo '<script>swal("Status!", "Error!!.", "error"); </script>';
 }
 
 } else if (isset($_GET['smt'])) {
-$sql = "INSERT INTO `results`(  `subject_id`, `class_id`, `student_id`, `type`, `title`,  `obtained_marks`, `total_marks`, `result`, `insert_by`,   `insert_at` ) VALUES ('$subj','$cls','$stid','$type','$title','$obtained_marks','$total_marks','$result','$insertby',current_timestamp())";
+$sql = "INSERT INTO `test`(  `subject_id`, `class_id`, `student_id`, `type`, `title`,  `obtained_marks`, `total_marks`, `result`,`date`,`time`, `insert_by`,   `insert_at` ) VALUES ('$subj','$cls','$stid','$type','$title','$obtained_marks','$total_marks','$result','$date','$time','$insertby',current_timestamp())";
 if (!mysqli_query($conn, $sql)) {
 echo '<script>swal("Status!","Error!!.","error"); </script>';
 } else {
@@ -74,7 +74,7 @@ $rid = mysqli_insert_id($conn);
 
 if(isset($_GET['rid'])){
 $id=  $_GET['rid'];
-$st_res = "SELECT * FROM results WHERE id=$id"; 
+$st_res = "SELECT * from test WHERE id=$id"; 
 $st_res = mysqli_query($conn, $st_res);
 $st_res = mysqli_fetch_assoc($st_res);
 $title=$st_res['title'];
@@ -82,6 +82,8 @@ $type=$st_res['type'];
 $obtained_marks=$st_res['obtained_marks'];
 $total_marks=$st_res['total_marks'];
 $result=$st_res['result'];
+$date=$st_res['date'];
+$time=$st_res['time'];
 
 }
 }
@@ -357,10 +359,7 @@ $result=$st_res['result'];
                                         value="Submit Result" />
                                 </div>
                                 <?php } ?>
-                                </form>
-
-
-
+                                </form> 
 
                                 <div class="col-md-12 mb-md-0 mb-4">
                                     <div class="card card-body border card-plain border-radius-lg  ">
@@ -379,17 +378,21 @@ $result=$st_res['result'];
                                                         <th> Name</th>
                                                         <th> Class</th>
                                                         <th> Subject</th>
+                                                        <th> Date</th>
+                                                        <th> Time</th>
+                                                        <th> Obtained Marks</th>
+                                                        <th> Total Marks</th>
                                                         <th> Action</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
                                                     <?php
 
-                                                $sql = "SELECT * FROM results";
+                                                $sql = "SELECT * from test";
                                                 if(isset($_GET['cls'])){
                                                 $class = $_GET['cls'];
                                                 $cls = $_GET['cls'];  
-                                                $sql = "SELECT * FROM results WHERE class_id=$class";
+                                                $sql = "SELECT * from test WHERE class_id=$class";
                                                 if (isset($_GET['stid'])) { 
                                                 $stid = $_GET['stid'];
                                                 $sql .= "  AND student_id=$stid"; 
@@ -435,6 +438,18 @@ $result=$st_res['result'];
                                                         </td>
                                                         <td>
                                                             <?= $subj_row['subject_name'] ?>
+                                                        </td>
+                                                        <td>
+                                                            <?= $row['date'] ?>
+                                                        </td>
+                                                        <td>
+                                                            <?= $row['time'] ?>
+                                                        </td>
+                                                        <td>
+                                                            <?= $row['obtained_marks'] ?>
+                                                        </td>
+                                                        <td>
+                                                            <?= $row['total_marks'] ?>
                                                         </td>
                                                         <td>
                                                             <?php

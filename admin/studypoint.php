@@ -90,7 +90,7 @@ if (isset($_GET['topic'])) {
 
             <div class="col-6 text-end">
               <a class="btn bg-gradient-dark mb-0" href="studypoint.php"><i
-                  class="material-icons text-sm"></i>Cancel</a>
+                  class="material-icons text-sm"></i>New</a>
             </div>
 
             <?php } ?>
@@ -122,11 +122,12 @@ if (isset($_GET['topic'])) {
                     <p><b>Class: </b><b style="float:right"><?= $getClass['class_name']; ?></b></p>
                     <p><b>Subject: </b><b style="float:right"><?= $getSubject['subject_name']; ?></b></p>
                     <div class="col-12 text-end">
+                      
+                    <button type="button" class="btn bg-gradient-success mb-0" onclick="getTopic(<?= $row_topic['topic_id'] ?>)" data-bs-toggle="modal" data-bs-target="#myModal">Show</button>
                       <a class="btn bg-gradient-primary mb-0"
                         href="studypoint.php?topic=<?= $row_topic['topic_id'] ?>"><i
                           class="material-icons text-sm"></i>update</a>
                     </div>
-
                   </div>
                   <?php
                          }
@@ -150,7 +151,7 @@ if (isset($_GET['topic'])) {
                   </div>
                   <div class="mb-3">
                     <label class="form-label">Select Class</label>
-                    <select name="cls" class="form-control form-control-lg" required>
+                    <select name="cls" class="form-control form-control-lg" onchange="getSubject(this)"  required>
                       <option value="">select</option>
                       <?php
                             $class_name = "";
@@ -167,7 +168,7 @@ if (isset($_GET['topic'])) {
                   </div>
                   <div class="mb-3">
                     <label class="form-label">Select Subject</label>
-                    <select name="subj" class="form-control form-control-lg" required>
+                    <select name="subj"  id="subj" class="form-control form-control-lg" required>
                       <option value="">select</option>
                       <?php
                             $subject_name = "";
@@ -227,6 +228,69 @@ if (isset($_GET['topic'])) {
 
 <?php include "footer.php" ?>
 <script src="../assets/js/plugins/ck.js"></script>
+
+
+<!-- The Modal -->
+<div class="modal" id="myModal">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content" id="modal_content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">please wait...</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+       please wait...
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<script>
+ function getTopic(id) {
+        
+        if (id == "") {
+            return;
+        }
+        var data = "getTopic=" + JSON.stringify({ id });
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) { 
+                $("#modal_content").empty();
+                $("#modal_content").append(xhttp.response);
+            }
+        };
+        xhttp.open("POST", "../admin/ajex.php", true);
+        xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhttp.send(data);
+    }
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
 <script>
   // This sample still does not showcase all CKEditor 5 features (!)
   // Visit https://ckeditor.com/docs/ckeditor5/latest/features/index.html to browse all the features.

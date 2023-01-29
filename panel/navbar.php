@@ -25,6 +25,11 @@
                     <span class="nav-item">Notification</span>
                 </a>
             </li>
+            <li><a href="performance.php">
+                    <i class="fa-solid fa-bell"></i>
+                    <span class="nav-item">Performace</span>
+                </a>
+            </li>
             <li><a href="Transport.php">
                     <i class="fa-solid fa-bus"></i>
                     <span class="nav-item">Transport</span>
