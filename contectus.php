@@ -4,7 +4,10 @@ include "header.php";
 ?>
 
 <div class="container_footer">
+
   <div class="form">
+
+
     <div class="contact-info">
       <h3 class="title">Let's get in touch</h3>
       <p class="text">
@@ -51,21 +54,37 @@ include "header.php";
       <span class="circle one"></span>
       <span class="circle two"></span>
 
-      <form action="index.html" autocomplete="off">
+      <form method="post"" autocomplete="off">
+
+        <?php
+        if (isset($_POST['enquiry'])) {
+          $email = $_POST['email'];
+          $name = $_POST['name'];
+          $number = $_POST['number'];
+          $message = $_POST['message'];
+          $sql = "INSERT INTO enquiry (`name`,`email`, `number` ,`message`) VALUE ('$name','$email','$number','$message')";
+          if (mysqli_query($conn, $sql)) {
+            ?>
+            <script>swal("status", "Enquiry Form submited.", "success")</script><?php
+          } else {
+            ?> <script>swal("status", "Something Went wrong!", "error")</script><?php
+          }
+        }
+        ?>
         <h3 class="title">Contact us</h3>
         <div class="input-container">
-          <input type="text" name="name" class="input" placeholder="Username" />
+          <input type="text" name="name" class="input" placeholder="Username" required />
         </div>
         <div class="input-container">
-          <input type="email" name="email" class="input" placeholder="Email" />
+          <input type="email" name="email" class="input" placeholder="Email" required/>
         </div>
         <div class="input-container">
-          <input type="tel" name="phone" class="input" placeholder="Phone" />
+          <input type="tel" name="number" class="input" placeholder="Phone"  required/>
         </div>
         <div class="input-container textarea">
           <textarea name="message" class="input" placeholder="Message"></textarea>
         </div>
-        <input type="submit" value="Send" class="btn" />
+        <input type="submit" value="Send" name="enquiry" class="btn" />
       </form>
     </div>
   </div>
@@ -75,5 +94,4 @@ include "header.php";
 
 
 
-    <?php include "footer.php"; ?>
-
+<?php include "footer.php"; ?>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 29, 2023 at 12:44 PM
+-- Generation Time: Feb 02, 2023 at 11:27 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.0.25
 
@@ -97,6 +97,20 @@ INSERT INTO `classes` (`id`, `class_name`, `incharge_id`, `insert_by`, `update_b
 (7, '5th ', 2, 1, '0000-00-00 00:00:00', '2023-01-28 16:20:21', 2023),
 (8, '6th', 3, 1, '0000-00-00 00:00:00', '2023-01-28 16:20:33', 2023),
 (9, '10th', 3, 1, '0000-00-00 00:00:00', '2023-01-28 16:20:48', 2023);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `enquiry`
+--
+
+CREATE TABLE `enquiry` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `message` text DEFAULT NULL,
+  `number` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -317,6 +331,12 @@ ALTER TABLE `classes`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `enquiry`
+--
+ALTER TABLE `enquiry`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `leaves`
 --
 ALTER TABLE `leaves`
@@ -381,6 +401,12 @@ ALTER TABLE `attendance`
 --
 ALTER TABLE `classes`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT for table `enquiry`
+--
+ALTER TABLE `enquiry`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `leaves`

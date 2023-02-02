@@ -620,9 +620,9 @@ h1{
 #button_register:hover{
     background-position: right;
 }
-.container_footer{
+/* .container_footer{
     margin-top: 1000px;
-}
+} */
   /* reg css end */
 
   /* login css start */
@@ -694,7 +694,7 @@ h1{
     background-position: right;
 }
 .container_footer{
-    margin-top: 1300px;
+    margin-top: 400px;
 }
   /* login css end */
 

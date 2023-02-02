@@ -1,0 +1,77 @@
+﻿body,html{
+    width:100%;
+    height:200vh;
+}
+.student_fee{
+    margin-top: 55px;
+    width:100%;
+    height:100vh;
+    position:relative;
+    top:100px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+.fee{
+    display: inline;
+    position:absolute; 
+    width:70%;
+    height:120%;
+    margin-top:530px;
+    border-bottom: white;
+}
+.fee_info{
+    width:95%;
+    background-color:#ddd;
+    margin-left:15px;
+    top:0px;
+}
+#fee_menu {
+   width:95%;
+   height:35px;
+   margin-top: 20px;
+}
+#fee_menu li{
+    display:inline;
+    margin:40px;
+ }
+#fee_value {
+    width: 95%;
+}
+#fee_value ul{
+    width: 95%;
+    height: 50px;
+    padding: 15px;
+}
+#fee_value li{
+    display:inline;
+    margin:50px;
+}
+#fee_value .fee_format {
+    background-color: white;
+    width:95%;
+    height:50px;
+    padding:15px;
+    margin-left:3px;
+}
+.fee_format ul{
+    width: 95%;
+    height: 60px;
+    padding: 15px;
+}
+#fee_value .fee_format li{
+    display:inline;
+    margin:48px;
+}
+.fee_footer{
+    margin-top:-150px;
+    margin-left:-200px;
+}
+.fee_footer .last_banner{
+        width: 142%;
+        height: 550px;
+}
+.team{
+    margin-top:440px;
+}
+

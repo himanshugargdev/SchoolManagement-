@@ -29,34 +29,13 @@ include("server/conn.php");
             </div>
             <ul class="top_items">
                 <li>
-                    <a href='website.php'>Home </a>
+                    <a href='index.php'>Home </a>
                 </li>
                 <li>
                     <a href='Fee.php'>Fee Structure</a>
                 </li>
-                <li>
-                    <a href='Registeration.php'>Registeration</a>
-                </li>
-                <li>
-                    <a href='login.php'>Login</a>
-                </li>
             </ul>
-        </div>
-        <div class="navbar">
-            <div class="container">
-                <ul>
-                    <li>
-                        <a href='admission.php' class='active'>ADMISSION</a>
-                    </li>
-                    <li><a href="about_school.php" class='active'>ABOUT SCHOOL</a></li>
-                    <li><a href="STUDENT ZONE" class='active'>STUDENT ZONE</a></li>
-                    <li><a href="Faculty.php" class='active'>FACULTY</a></li>
-                    <li><a href="FACILITIES" class='active'>FACILITIES</a></li>
-                    <li><a href="ACHIEVEMENTS" class='active'>ACHIEVEMENTS</a></li>
-                    <li><a href="LOGIN" class='active'>LOGIN</a></li>
-                </ul>
-            </div>
-        </div>
+        </div> 
         <script src="https://code.jquery.com/jquery-3.6.1.js">
         </script>
         <script type="text/javascript">
