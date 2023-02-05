@@ -44,7 +44,7 @@ include "header.php";
                     <div class="mb-3">
                       <label class="form-label">Select Class</label>
                       <select name="cls" class="form-control form-control-lg">
-                        <option value="">select</option>
+                        <option value="">Self Registered</option>
 
                         <?php
                         $class_name = "";
@@ -98,6 +98,7 @@ include "header.php";
                         <th> Name</th>
                         <th> Email</th>
                         <th> Phone</th>
+                        <th> self Registered</th>
                         <th> Action</th>
                       </tr>
                     </thead>
@@ -108,8 +109,11 @@ include "header.php";
                         $class = $_GET['cls'];
 
                         $sql = "SELECT * FROM student WHERE class_id=$class";
-                        $sql = mysqli_query($conn, $sql);
-
+                      }else{
+                        $sql = "SELECT * FROM student WHERE isselfRegistered=1";
+                      }
+                      
+                      $sql = mysqli_query($conn, $sql);
                         while ($row = mysqli_fetch_assoc($sql)) {
                       ?>
                       <tr>
@@ -117,11 +121,12 @@ include "header.php";
                         <td><?= $row['student_name'] ?></td>
                         <td><?= $row['student_email'] ?></td>
                         <td><?= $row['student_phone'] ?></td>
+                        <td><?= $row['isselfRegistered']==1? 'YES' : 'NO' ?></td>
                         <td><a href="managestudent.php?stid=<?= $row['student_id'] ?>">View</a></td>
                       </tr>
                       <?php
                         }
-                      }
+                      
                       ?>
 
                     </tbody>

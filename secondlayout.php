@@ -127,11 +127,11 @@
          </div>
      </div>
     </div>
-            <div class="wrapper1">
+             
             <?php 
             include "footer.php"
             ?>
-            </div>
+           
         
         
 </body>

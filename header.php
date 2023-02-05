@@ -29,10 +29,14 @@ include("server/conn.php");
             </div>
             <ul class="top_items">
                 <li>
-                    <a href='index.php'>Home </a>
+                    <a href='Fee.php'>Fee Structure</a>
                 </li>
                 <li>
-                    <a href='Fee.php'>Fee Structure</a>
+                    <a href='index.php'>Home </a>
+                </li> 
+                <li><a href='Registeration.php'>Register</a>
+                </li>
+                <li><a href='login.php'>Login</a>
                 </li>
             </ul>
         </div> 

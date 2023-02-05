@@ -28,6 +28,8 @@ include("server/conn.php");
                 </li>
                 <li><a href='login.php'>Login</a>
                 </li>
+                <li><a href='Registeration.php'>Register</a>
+                </li>
 
             </ul>
         </div> 

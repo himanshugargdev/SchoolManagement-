@@ -11,14 +11,16 @@ if (isset($_POST['update']) || isset($_POST['new'])) {
   $class_id = $_POST['class_id'];
   $admin_id = $_SESSION['admin_id'];
   $status = $_POST['status'];
+  $s_question = $_POST['s_question'];
+  $answer = $_POST['answer'];
 }
 
 if (isset($_POST['update'])) {
   $student_id = $_POST['stid'];
   $date = date("Y-m-d h:i:saY-m-d");
-  $sql = "UPDATE `student` SET  `student_roll_no`=$student_roll_no ,`class_id`= $class_id,`student_name`= '$student_name',`student_email`= '$student_email',`student_phone`= '$student_phone' ,`update_by`= $admin_id,`update_at`= '$date',`status` ='$status' WHERE student_id=$student_id";
+  $sql = "UPDATE `student` SET `security_question`='$s_question', `security_answer`='$answer',`student_roll_no`='$student_roll_no' ,`class_id`= '$class_id',`student_name`= '$student_name',`student_email`= '$student_email',`student_phone`= '$student_phone' ,`update_by`= $admin_id,`update_at`= '$date',`status` ='$status' WHERE student_id=$student_id";
   if (!mysqli_query($conn, $sql)) {
-    echo '<script>swal("Status!","Unable to Update.","error"); </script>';
+    echo '<script>swal("Status!","Unable to Update.'.mysqli_error($conn).'","error"); </script>';
   } else {
 
     echo '<script>swal("Status!","Updated.","success"); </script>';
@@ -27,7 +29,7 @@ if (isset($_POST['update'])) {
 
 if (isset($_POST['new'])) {
 
-    $sql = "INSERT INTO `student`( `student_roll_no`, `class_id`, `student_name`, `student_email`, `student_phone`, `student_psw`, `insert_by` ,`status`) VALUES ('$student_roll_no',  '$class_id',  '$student_name',  '$student_email', '$student_phone' ,  '123456',  $admin_id,'$status')";
+    $sql = "INSERT INTO `student`( `student_roll_no`, `class_id`, `student_name`, `student_email`, `student_phone`, `student_psw`, `insert_by` ,`status`,`security_question` ,`security_answer`) VALUES ('$student_roll_no',  '$class_id',  '$student_name',  '$student_email', '$student_phone' ,  '123456',  $admin_id,'$status','$s_question', '$answer')";
   if (!mysqli_query($conn, $sql)) {
     echo '<script>swal("Status!","Unable to Add New Student.","error"); </script>';
   } else {
@@ -52,10 +54,18 @@ if (isset($_GET['stid'])) {
     $student_phone = $row['student_phone'];
     $class_id = $row['class_id'];
     $status = $row['status'];
-    $cls_sql = "SELECT * from classes where id=$class_id";
-    $cls_sql = mysqli_query($conn, $cls_sql);
-    $cls_row = mysqli_fetch_assoc($cls_sql);
-    $class_name = $cls_row['class_name'];
+    $s_question = $row['security_question'];
+    $answer = $row['security_answer'];
+   
+      $cls_sql = "SELECT * from classes where id=$class_id";
+      $cls_sql = mysqli_query($conn, $cls_sql);
+      $cls_row = mysqli_fetch_assoc($cls_sql);
+      if(isset($cls_row['class_name'])){
+
+        $class_name = $cls_row['class_name'];
+      }else
+      $class_name = "NOT a Class Member";
+   
   }
 }
 
@@ -184,6 +194,21 @@ if (isset($_GET['stid'])) {
                     <label class="form-label">Roll No.</label>
                     <input type="number" name="student_roll_no" class="form-control form-control-lg"
                       value="<?= $student_roll_no ?>" placeholder="  Roll No.">
+                  </div>
+                  
+                  <div class="mb-3">
+                    <label class="form-label">Security Question</label>
+                    <select name="s_question" class="form-control form-control-lg">
+                           <option value="">select</option>
+                            <option value="Enter your Best Friend Name"  <?=$s_question=='Enter your Best Friend Name'?'selected':null?>>Enter your Best Friend Name</option>                   
+                            <option value="Enter your Pat Name"          <?=$s_question=='Enter your Pat Name'?'selected':null?>>Enter your Pat Name</option>                   
+                            <option value="Enter your First School Name" <?=$s_question=='Enter your First School Name'?'selected':null?>>Enter your First School Name</option>                   
+                            
+                    </select>
+                    <div class="mb-3">
+                    <label class="form-label">Answer</label>
+                    <input type="password" name="answer" class="form-control form-control-lg"
+                      value="<?= $answer ?>" placeholder="Answer">
                   </div>
                   <div class="mb-3">
                     <label class="form-label">Status</label>
