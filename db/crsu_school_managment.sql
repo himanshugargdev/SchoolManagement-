@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 02, 2023 at 11:27 AM
+-- Generation Time: Feb 05, 2023 at 03:33 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.0.25
 
@@ -177,27 +177,31 @@ INSERT INTO `staff` (`staff_id`, `staff_name`, `staff_email`, `staff_phone`, `st
 
 CREATE TABLE `student` (
   `student_id` int(11) NOT NULL,
-  `student_roll_no` int(11) NOT NULL,
+  `student_roll_no` int(11) DEFAULT NULL,
   `class_id` int(11) DEFAULT NULL,
   `student_name` varchar(255) DEFAULT NULL,
   `student_email` varchar(255) DEFAULT NULL,
   `student_phone` varchar(13) DEFAULT NULL,
   `student_psw` varchar(255) DEFAULT NULL,
-  `insert_by` int(11) NOT NULL,
-  `insert_at` int(11) NOT NULL,
+  `security_question` varchar(200) DEFAULT NULL,
+  `security_answer` varchar(200) DEFAULT NULL,
+  `insert_by` int(11) DEFAULT NULL,
+  `insert_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `update_by` int(11) NOT NULL,
-  `update_at` int(11) NOT NULL,
-  `status` enum('active','in-active') NOT NULL
+  `update_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `status` enum('active','in-active') NOT NULL,
+  `isselfRegistered` tinyint(1) DEFAULT 0 COMMENT '0 no 1 yes'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `student`
 --
 
-INSERT INTO `student` (`student_id`, `student_roll_no`, `class_id`, `student_name`, `student_email`, `student_phone`, `student_psw`, `insert_by`, `insert_at`, `update_by`, `update_at`, `status`) VALUES
-(1001, 20221703, 7, 'kapil', 'kapil@gmail.com', '1234567890', '1234', 1, 0, 1, 2023, 'active'),
-(1002, 20221729, 6, 'himanshu', 'himanshu@gmail.com', '1234567891', '123456', 1, 0, 0, 0, 'active'),
-(1004, 20221728, 7, 'Mohit', 'mohit@gmail.com', '123456788', '123456', 1, 0, 0, 0, 'active');
+INSERT INTO `student` (`student_id`, `student_roll_no`, `class_id`, `student_name`, `student_email`, `student_phone`, `student_psw`, `security_question`, `security_answer`, `insert_by`, `insert_at`, `update_by`, `update_at`, `status`, `isselfRegistered`) VALUES
+(1001, 20221703, 7, 'kapil', 'kapil@gmail.com', '1234567890', '1234', NULL, NULL, 1, '2023-02-09 18:34:29', 1, '0000-00-00 00:00:00', 'active', 0),
+(1002, 20221729, 6, 'himanshu', 'himanshu@gmail.com', '1234567891', '123456', NULL, NULL, 1, '2023-02-05 18:30:00', 0, '0000-00-00 00:00:00', 'active', 0),
+(1004, 20221728, 7, 'Mohit', 'mohit@gmail.com', '123456788', '123456', NULL, NULL, 1, '2023-02-07 18:35:11', 0, '0000-00-00 00:00:00', 'active', 0),
+(1007, 0, 0, 'ajay harikesh', 'ajay@gmail.com', '09728987761', 'Ajay@8570', 'Enter your Best Friend Name', 'xzcxc', NULL, '2023-02-03 18:39:07', 1, '2023-02-04 07:22:20', 'active', 1);
 
 -- --------------------------------------------------------
 
@@ -424,7 +428,7 @@ ALTER TABLE `staff`
 -- AUTO_INCREMENT for table `student`
 --
 ALTER TABLE `student`
-  MODIFY `student_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1005;
+  MODIFY `student_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1013;
 
 --
 -- AUTO_INCREMENT for table `subject`
