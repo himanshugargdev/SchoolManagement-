@@ -46,10 +46,10 @@
             ?>
 
           <form method="post">
-          <input type="text" name="name" placeholder="Name" />
-                <input type="email"  name="email"placeholder="E-mail" />
-                <input type="number" name="number" placeholder="Contact No." />
-                <input type="text" name="message" placeholder="Message" style="padding:5px 0px 50px 5px" />
+          <input type="text" name="name" placeholder="Name" required />
+                <input type="email"  name="email"placeholder="E-mail" required />
+                <input type="number" name="number" placeholder="Contact No." required />
+                <input type="text" name="message" placeholder="Message" style="padding:5px 0px 50px 5px" required />
                 <button type="submit" name="enquiry"   >Send</button> 
           </form>
             </div></div>

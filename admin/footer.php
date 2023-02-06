@@ -1,26 +1,4 @@
-<footer class="footer py-4  ">
-  <div class="container-fluid">
-    <div class="row justify-content-center justify-content-lg-end">
 
-      <div class="col-lg-6">
-        <ul class="nav nav-footer justify-content-center justify-content-lg-end">
-          <li class="nav-item">
-            <a href="https://https://crsu.ac.in/" class="nav-link text-muted" target="_blank">CRSU</a>
-          </li>
-          <li class="nav-item">
-            <a href="https://https://crsu.ac.in/" class="nav-link text-muted" target="_blank">CRSU</a>
-          </li>
-          <li class="nav-item">
-            <a href="https://https://crsu.ac.in/" class="nav-link text-muted" target="_blank">CRSU</a>
-          </li>
-          <li class="nav-item">
-            <a href="https://https://crsu.ac.in/" class="nav-link pe-0 text-muted" target="_blank">CRSU</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</footer>
 
 <!--   Core JS Files   -->
 <script src="../assets/js/core/popper.min.js"></script>
