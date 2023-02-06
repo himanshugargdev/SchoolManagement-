@@ -161,7 +161,7 @@ include "header.php";
       </div>
     </div>
     <!-- Event /Calender -->
-    <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+    <!-- <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
       <div class="card">
         <div class="card-header p-3 pt-2">
           <a href="events.php">
@@ -180,16 +180,9 @@ include "header.php";
           <p class="mb-0"><span class="text-success text-sm font-weight-bolder">Our </span> Event /Calender</p>
         </div>
       </div>
-    </div>
-
-
+    </div> -->
   </div>
 
-
-  <div class="col-md-12 mb-lg-0 mb-4">
-
-
-  </div>
   </div>
 </main>
 

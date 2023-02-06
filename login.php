@@ -11,8 +11,7 @@ include "header.php";
                 if (isset($_POST['login'])) {
                     $username = $_POST['username'];
                     $psw = $_POST['psw'];
-                    $user = $_POST['user'];
-                    $flag = false;
+                    $user = $_POST['user']; 
                     if (empty($username) || empty($psw)) {
                 ?>
                 <script>
@@ -47,7 +46,7 @@ include "header.php";
                         }
 
                     } else if ($user == "student") {
-                        $flag = true;
+                        
                         $sql = "SELECT * FROM student WHERE (student_email='$username' OR student_phone='$username') AND student_psw='$psw'";
                         $res = mysqli_query($conn, $sql);
                         if (mysqli_num_rows($res) > 0) {
@@ -71,7 +70,7 @@ include "header.php";
                         }
 
                     } else if ($user == "staff") {
-                        $flag = true;
+                        
                         $sql = "SELECT * FROM staff WHERE (staff_email='$username' OR staff_phone='$username') AND staff_psw='$psw'";
                         $res = mysqli_query($conn, $sql);
                         if (mysqli_num_rows($res) > 0) {
@@ -98,7 +97,7 @@ include "header.php";
                 ?>
                 <script>
                     swal("Status!", "Can not Login Please choose correct user type", "error").then(function () {
-                        alert();
+                       
                     });
 
                 </script>
