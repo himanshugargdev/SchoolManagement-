@@ -8,7 +8,8 @@ include "navbar.php";
 <div class="wrapper_leave">
     <div class="container_leave">
 <form method="post">
-    <?php 
+    <?php
+  
     if(isset($_POST['add'])){
         $sid = $_SESSION['student_id'];
         $roll_no=$_POST['roll_no'];

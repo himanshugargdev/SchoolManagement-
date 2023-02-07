@@ -7,9 +7,10 @@ if(empty($_SESSION['student_id'])||!isset($_SESSION['student_id'])||!isset($_SES
     exit();
 }
    
-    $res = mysqli_query($conn, "SELECT * FROM student WHERE student_id=" . $_SESSION['student_id']);
+    $res = mysqli_query($conn, "SELECT * FROM student WHERE student_id=" . $_SESSION['student_id']." LIMIT 1");
             if(mysqli_num_rows($res)>0){
                     $row = mysqli_fetch_assoc($res);
+
                 $_SESSION['student_id']=$row['student_id'];
                 $_SESSION['student_name']=$row['student_name'];
                 $_SESSION['student_email']=$row['student_email'];
@@ -37,7 +38,7 @@ if(empty($_SESSION['student_id'])||!isset($_SESSION['student_id'])||!isset($_SES
             }
 
             $accessOk = false;
-            if($_SESSION['student_roll_no']=""||$_SESSION['student_roll_no']==0){
+            if($_SESSION['student_roll_no']==""||$_SESSION['student_roll_no']==0){
                 
             $accessOk = true;
                 $curPageName = substr($_SERVER["SCRIPT_NAME"],strrpos($_SERVER["SCRIPT_NAME"],"/")+1);

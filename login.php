@@ -35,6 +35,7 @@ if (isset($_POST['login'])) {
             $_SESSION['student_name'] = $row_adm['student_name'];
             $_SESSION['student_email'] = $row_adm['student_email'];
             $_SESSION['student_phone'] = $row_adm['student_phone'];
+            $_SESSION['student_roll_no'] = $row_adm['student_roll_no'];
             $_SESSION['session_status'] = 'student';
             header("location:panel/profile.php");
         }
