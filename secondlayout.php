@@ -108,22 +108,29 @@
               <div class="image_box">
                     <img src="assets/images/Himanshu.jpg">
               </div>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis deleniti rerum animi aut voluptatibus optio vero magnam tempora ut laborum accusantium saepe sunt velit consequuntur, eaque at quis exercitationem dolores.</p>
-                <h4>Team Member<br><span>HIMANSHU</span></h4>
+                <p>
+                “Hi, I’m Himanshu. I’m from Narwana.
+                
+                </p>
+                <h4>Designer<br><span>HIMANSHU</span></h4>
          </div>
                  <div class="box1">
                 <div class="image_box">
                     <img src="assets/images/Ajay.jpg">
                 </div>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis deleniti rerum animi aut voluptatibus optio vero magnam tempora ut laborum accusantium saepe sunt velit consequuntur, eaque at quis exercitationem dolores.</p>
-                <h4>Team Member<br><span>AJAY</span></h4>
+                <p> “Hi, I’m Ajay. I’m from Jind.
+                    
+               
+                     <h4>Project Leader <br><span>AJAY</span></h4>
                 </div>
                 <div class="box1">
                 <div class="image_box">
                     <img src="assets/images/kapil.png">
                 </div>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis deleniti rerum animi aut voluptatibus optio vero magnam tempora ut laborum accusantium saepe sunt velit consequuntur, eaque at quis exercitationem dolores.</p>
-                <h4>Team Member<br><span>KAPIL</span></h4>
+                <p> “Hi, I’m Kapil. I’m from Jind.
+                    
+                </p>
+                <h4>Designer Developer<br><span>KAPIL</span></h4>
          </div>
      </div>
     </div>

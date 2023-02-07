@@ -84,11 +84,11 @@ if (mysqli_num_rows($res) > 0) {
           </a>
         </li>
         
-        <li class="nav-item">
+        <!-- <li class="nav-item">
           <a class="nav-link text-white   bg-gradient-secondary" href="manage-work.php">
             <span class="nav-link-text ms-1">Manage Work</span>
           </a>
-        </li>
+        </li> -->
         
         <li class="nav-item">
           <a class="nav-link text-white   bg-gradient-secondary" href="manage-test.php">

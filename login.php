@@ -72,6 +72,8 @@ if (isset($_POST['login'])) {
                         <option value="student">Student</option>
                     </select>
                 </div>
+                 
+            <a href="forgot.php" style="padding:10px;color:green;float:right">forget password</a>
                 <input type="submit" name="login" value="Login" id="button_login">
 
             </form>

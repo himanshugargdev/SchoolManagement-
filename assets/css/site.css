@@ -698,4 +698,15 @@ h1{
 }
   /* login css end */
 
+   .username_register select{
+    border: none;
+    background-color: transparent;
+    width: 100%;
+   }
+
    
+    select{
+    border: none;
+    background-color: transparent;
+    width: 100%;
+   }

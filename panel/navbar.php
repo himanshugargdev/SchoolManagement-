@@ -20,11 +20,11 @@
                     <span class="nav-item">Leave Detail</span>
                 </a>
             </li>
-            <li><a href="Notification.php">
+            <!-- <li><a href="Notification.php">
                     <i class="fa-solid fa-bell"></i>
                     <span class="nav-item">Notification</span>
                 </a>
-            </li>
+            </li> -->
             <li><a href="performance.php">
                     <i class="fa-solid fa-bell"></i>
                     <span class="nav-item">Performace</span>
