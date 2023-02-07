@@ -17,7 +17,8 @@
             <p  class="box_info"><b>Mobile No. :     </b><span><?= $_SESSION['student_phone']?></span></p>
             <p  class="box_info"><b>Incharge Name :  </b><span><?= isset($Incharge_name)==true?$Incharge_name:null ?>(<?=isset($staff_role)==true?$staff_role:null?>)</span> </p>
             <p  class="box_info"><b>Change Password :  </b><span><a href="updatePass.php">click</a></span> </p>
-       
+            <p style="color:red;text-align:center;display:<?=$accessOk==false?'none':'block'?>">Your Profile is Panding by Admin for Full Access</p>
+            <p style="color:green;text-align:center;display:<?=$accessOk==true?'none':'block'?>">Your Profile is Completed</p>
         </div>
     </div>
  

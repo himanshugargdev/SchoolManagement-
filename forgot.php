@@ -61,7 +61,7 @@ if (isset($_POST['forgot'])) {
                         <option value="student">Student</option>
                     </select>
                 </div>
-                <input type="submit" name="forgot" value="Login" id="button_login"> 
+                <input type="submit" name="forgot" value="Forgot" id="button_login"> 
             </form>
         </div>
     </div>

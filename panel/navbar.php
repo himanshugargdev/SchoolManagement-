@@ -45,6 +45,7 @@
                     <span class="nav-item">Class Detail</span>
                 </a>
             </li>
+            
             <li><a href="../logout.php" class="logout">
                     <i class="fa-solid fa-right-from-bracket"></i>
                     <span class="nav-item">Logout</span>

@@ -35,7 +35,23 @@ if(empty($_SESSION['student_id'])||!isset($_SESSION['student_id'])||!isset($_SES
                 $_SESSION['student_phone']=$row['student_phone'];   
                 } 
             }
- 
+
+            $accessOk = false;
+            if($_SESSION['student_roll_no']=""||$_SESSION['student_roll_no']==0){
+                
+            $accessOk = true;
+                $curPageName = substr($_SERVER["SCRIPT_NAME"],strrpos($_SERVER["SCRIPT_NAME"],"/")+1);
+                if ($curPageName != "profile.php" && $curPageName != "updatePass.php"){ 
+
+                  ?>
+                  <script>
+                  alert("Don't have Access to visit without Complete Profile");
+                  window.location="profile.php"
+                </script>
+                  <?php
+                }
+        
+            }
 ?>
 
 <!DOCTYPE html>
