@@ -9,7 +9,7 @@
 if(isset($isAuthOk))
 if($isAuthOk==false){ ?>
 
-   <script> swal("Status!", "please Fill correct infrmation to login.", "error"); </script> 
+   <script> swal("Status!", "please Fill correct info to login.", "error"); </script> 
   
    <?php }?>
                   
