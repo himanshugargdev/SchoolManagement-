@@ -27,7 +27,8 @@ if (isset($_POST['login'])) {
             $_SESSION['admin_email'] = $row_adm['admin_email'];
             $_SESSION['admin_phone'] = $row_adm['admin_phone'];
             $_SESSION['session_status'] = 'admin';
-            header("location:admin/");
+            // header("location:admin/");
+            echo"<script>window.location='admin/'</script>";
         }
         if($user=="student"){
             $row_adm = mysqli_fetch_assoc($res);
@@ -37,7 +38,8 @@ if (isset($_POST['login'])) {
             $_SESSION['student_phone'] = $row_adm['student_phone'];
             $_SESSION['student_roll_no'] = $row_adm['student_roll_no'];
             $_SESSION['session_status'] = 'student';
-            header("location:panel/profile.php");
+            // header("location:panel/profile.php"); 
+            echo"<script>window.location='panel/profile.php'</script>";
         }
         if($user=="staff"){
             $row_adm = mysqli_fetch_assoc($res);
@@ -46,7 +48,9 @@ if (isset($_POST['login'])) {
             $_SESSION['staff_email'] = $row_adm['staff_email'];
             $_SESSION['staff_phone'] = $row_adm['staff_phone'];
             $_SESSION['session_status'] = 'staff';
-            header("location:teach/");
+            // header("location:teach/");
+            echo"<script>window.location='teach/'</script>";
+            
          }  
          $isAuthOk = true;
          return; 
