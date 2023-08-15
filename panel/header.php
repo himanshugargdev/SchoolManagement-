@@ -1,5 +1,4 @@
 <?php
-include "../server/";
 include "../server/conn.php";
 
 if (empty($_SESSION['student_id']) || !isset($_SESSION['student_id']) || !isset($_SESSION['session_status'])) {

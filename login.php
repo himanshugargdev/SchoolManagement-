@@ -61,7 +61,7 @@ if (isset($_POST['login'])) {
 <div class="wrapper_login">
     <div class="container_login">
         <div class="box_login">
-            <form method="post" onsubmit="return loginSubmit(this)">
+            <form method="post">
                 <h1>Login</h1><br>
                 <div class="username_login">
                     <input type="text" placeholder="Email/Phone No." name="username" required>
