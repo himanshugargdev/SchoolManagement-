@@ -1,5 +1,5 @@
 <?php
-include "../server/session.php";
+include "../server/conn.php";
 if (!isset($_SESSION['session_status'])) {
 
   echo '<script>window.location="../login.php";</script>';
@@ -8,7 +8,6 @@ if (!isset($_SESSION['session_status'])) {
 if (!isset($_SESSION["staff_id"])) {
   echo '<script>window.location="../login.php";</script>';
 }
-include "../server/conn.php";
 $sql = "SELECT * FROM staff WHERE    staff_id=" . $_SESSION['staff_id'];
 $res = mysqli_query($conn, $sql);
 if (mysqli_num_rows($res) > 0) {
@@ -61,7 +60,9 @@ if (mysqli_num_rows($res) > 0) {
         aria-hidden="true" id="iconSidenav"></i>
       <a class="navbar-brand m-0" href="#">
         <img src="../assets/images/white.png" class="navbar-brand-img h-100" alt="main_logo">
-        <span class="ms-1 font-weight-bold text-white">WELCOME<br><?= $_SESSION['staff_name'] ?></span>
+        <span class="ms-1 font-weight-bold text-white">WELCOME<br>
+          <?= $_SESSION['staff_name'] ?>
+        </span>
       </a>
     </div>
     <hr class="horizontal light mt-0 mb-2">
@@ -76,27 +77,27 @@ if (mysqli_num_rows($res) > 0) {
           <a class="nav-link text-white   bg-gradient-secondary" href="profile.php">
             <span class="nav-link-text ms-1">My Profile</span>
           </a>
-        </li> 
-        
+        </li>
+
         <li class="nav-item">
           <a class="nav-link text-white   bg-gradient-secondary" href="manage-attendance.php">
             <span class="nav-link-text ms-1"> Attendance</span>
           </a>
         </li>
-        
+
         <!-- <li class="nav-item">
           <a class="nav-link text-white   bg-gradient-secondary" href="manage-work.php">
             <span class="nav-link-text ms-1">Manage Work</span>
           </a>
         </li> -->
-        
+
         <li class="nav-item">
           <a class="nav-link text-white   bg-gradient-secondary" href="manage-test.php">
             <span class="nav-link-text ms-1">Manage Test</span>
           </a>
         </li>
-        
-       
+
+
       </ul>
     </div>
     <div class="sidenav-footer position-absolute w-100 bottom-0 ">

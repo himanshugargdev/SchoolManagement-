@@ -1,5 +1,6 @@
 <?php
-include "../server/session.php";
+include "../server/conn.php";
+
 if (!isset($_SESSION['session_status'])) {
 
   echo '<script>window.location="../login.php";</script>';
@@ -8,7 +9,6 @@ if (!isset($_SESSION['session_status'])) {
 if (!isset($_SESSION["admin_id"])) {
   echo '<script>window.location="../login.php";</script>';
 }
-include "../server/conn.php";
 $sql = "SELECT * FROM admin WHERE    admin_id=" . $_SESSION['admin_id'];
 $res = mysqli_query($conn, $sql);
 if (mysqli_num_rows($res) > 0) {
@@ -61,7 +61,9 @@ if (mysqli_num_rows($res) > 0) {
         aria-hidden="true" id="iconSidenav"></i>
       <a class="navbar-brand m-0" href="#">
         <img src="../assets/images/white.png" class="navbar-brand-img h-100" alt="main_logo">
-        <span class="ms-1 font-weight-bold text-white">WELCOME<br><?= $_SESSION['admin_name'] ?></span>
+        <span class="ms-1 font-weight-bold text-white">WELCOME<br>
+          <?= $_SESSION['admin_name'] ?>
+        </span>
       </a>
     </div>
     <hr class="horizontal light mt-0 mb-2">

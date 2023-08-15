@@ -1,5 +1,5 @@
 <?php
-include("server/session.php");
+;
 include "header.php";
 ?>
 <div class="wrapper_login">

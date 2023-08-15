@@ -57,14 +57,16 @@ if (isset($_GET['stid'])) {
     $s_question = $row['security_question'];
     $answer = $row['security_answer'];
    
+    if($class_id){
       $cls_sql = "SELECT * from classes where id=$class_id";
       $cls_sql = mysqli_query($conn, $cls_sql);
       $cls_row = mysqli_fetch_assoc($cls_sql);
-      if(isset($cls_row['class_name'])){
+    }
 
-        $class_name = $cls_row['class_name'];
-      }else
-      $class_name = "NOT a Class Member";
+        if(isset($cls_row['class_name'])){
+          $class_name = $cls_row['class_name'];
+        }else
+        $class_name = "NOT a Class Member";
    
   }
 }

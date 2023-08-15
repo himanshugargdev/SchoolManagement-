@@ -1,5 +1,4 @@
 <?php
-include("./server/session.php");
 include "header.php";
 ?>
 
@@ -54,7 +53,7 @@ include "header.php";
       <span class="circle one"></span>
       <span class="circle two"></span>
 
-      <form method="post"" autocomplete="off">
+      <form method="post"" autocomplete=" off">
 
         <?php
         if (isset($_POST['enquiry'])) {
@@ -65,9 +64,12 @@ include "header.php";
           $sql = "INSERT INTO enquiry (`name`,`email`, `number` ,`message`) VALUE ('$name','$email','$number','$message')";
           if (mysqli_query($conn, $sql)) {
             ?>
-            <script>swal("status", "Enquiry Form submited.", "success")</script><?php
+            <script>swal("status", "Enquiry Form submited.", "success")</script>
+            <?php
           } else {
-            ?> <script>swal("status", "Something Went wrong!", "error")</script><?php
+            ?>
+            <script>swal("status", "Something Went wrong!", "error")</script>
+            <?php
           }
         }
         ?>
@@ -76,10 +78,10 @@ include "header.php";
           <input type="text" name="name" class="input" placeholder="Username" required />
         </div>
         <div class="input-container">
-          <input type="email" name="email" class="input" placeholder="Email" required/>
+          <input type="email" name="email" class="input" placeholder="Email" required />
         </div>
         <div class="input-container">
-          <input type="tel" name="number" class="input" placeholder="Phone"  required/>
+          <input type="tel" name="number" class="input" placeholder="Phone" required />
         </div>
         <div class="input-container textarea">
           <textarea name="message" class="input" placeholder="Message"></textarea>
