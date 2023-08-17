@@ -1,5 +1,5 @@
 <?php
-include "../server/conn.php";
+require_once("../server/conn.php");
 if (!isset($_SESSION['session_status'])) {
 
   echo '<script>window.location="../login.php";</script>';

@@ -1,5 +1,5 @@
 <?php
-include "../server/conn.php";
+require_once("../server/conn.php");
 
 if (empty($_SESSION['student_id']) || !isset($_SESSION['student_id']) || !isset($_SESSION['session_status'])) {
     header("location:../login.php");

@@ -1,5 +1,5 @@
 <?php
-include("server/conn.php");
+require_once("server/conn.php");
 ?>
 <html>
 
@@ -33,13 +33,13 @@ include("server/conn.php");
                 </li>
                 <li>
                     <a href='index.php'>Home </a>
-                </li> 
+                </li>
                 <li><a href='Registeration.php'>Register</a>
                 </li>
                 <li><a href='login.php'>Login</a>
                 </li>
             </ul>
-        </div> 
+        </div>
         <script src="https://code.jquery.com/jquery-3.6.1.js">
         </script>
         <script type="text/javascript">

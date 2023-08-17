@@ -1,10 +1,8 @@
 <?php
-session_start();
 
-$host = "localhost";
-$psw = "";
-$root = "root";
-$db = "crsu_school_managment";
+require_once("init.php");
+
+
 $conn = mysqli_connect($host, $root, $psw, $db);
 date_default_timezone_set('asia/kolkata');
 if ($conn->connect_error) {
